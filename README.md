@@ -1,3 +1,3 @@
-# scb-exam-service
+# exam-service
 
 This is backup project
