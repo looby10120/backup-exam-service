@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -87,5 +88,20 @@ public class ExamController {
         return ResponseEntity.ok(new ResponseModel(status, historyExam));
     }
 
+    @RequestMapping(path = "/list_history")
+    public List<HistoryExam> getAllHistory() {
+        List<HistoryExam> resp = examService.getHistoryExam();
+        return resp;
+    }
+
+    @PostMapping("/create_history")
+    public ResponseEntity<?> createHistoryExam(@Valid @RequestBody HistoryExam body) {
+
+        HistoryExam historyExam = examService.createHistoryExam(body);
+        StatusModel status = new StatusModel(
+                StatusResponse.GET_RESPONSE_SUCCESS.getCode(), StatusResponse.GET_RESPONSE_SUCCESS.getMessage()
+        );
+        return ResponseEntity.ok(new ResponseModel(status, "Save history success."));
+    }
 
 }

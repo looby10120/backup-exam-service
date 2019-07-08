@@ -2,6 +2,7 @@ package com.digitalacademy.examservice.services;
 
 import com.digitalacademy.examservice.mock.ExamMockTest;
 import com.digitalacademy.examservice.models.Choice;
+import com.digitalacademy.examservice.models.HistoryExam;
 import com.digitalacademy.examservice.models.Question;
 import com.digitalacademy.examservice.models.response.*;
 
@@ -330,6 +331,45 @@ public class ExamServiceTest {
 //        assertEquals(date, resp.getGetHistoryUserDoExam().get(0).getTimestamp());
 //        assertEquals(10, resp.getGetHistoryUserDoExam().get(0).getExamTotalScore());
         assertEquals(8, resp.getGetHistoryUserDoExam().get(0).getPointExam());
+    }
+
+    public HistoryExam sethistoryCreateMock(){
+
+        HistoryExam historyExam = new HistoryExam();
+        historyExam.setHistoryId(1L);
+        historyExam.setHistoryExamId(1L);
+        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryScore(10);
+        historyExam.setHistoryTime(30);
+
+        return historyExam;
+    }
+
+    public HistoryExam gethistoryCreateMock(){
+
+        HistoryExam historyExam = new HistoryExam();
+        historyExam.setHistoryId(1L);
+        historyExam.setHistoryExamId(1L);
+        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryScore(10);
+        historyExam.setHistoryTime(30);
+
+        return historyExam;
+    }
+
+    @DisplayName("Test create history should return list")
+    @Test
+    void testCreateHistoryExam() {
+
+        when(historyExamRepository.save(sethistoryCreateMock())).thenReturn(gethistoryCreateMock());
+        HistoryExam resp = examService.createHistoryExam(gethistoryCreateMock());
+        log.info("Get History By Id:");
+
+        assertEquals("1", resp.getHistoryId().toString());
+        assertEquals("1", resp.getHistoryExamId().toString());
+        assertEquals("1", resp.getHistoryUserId().toString());
+        assertEquals("10", resp.getHistoryScore().toString());
+        assertEquals("30", resp.getHistoryTime().toString());
     }
 
 }

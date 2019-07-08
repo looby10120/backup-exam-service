@@ -437,4 +437,27 @@ public class ExamMockTest {
         return getHistory;
     }
 
+    public HistoryExam sethistoryCreateMock(){
+
+        HistoryExam historyExam = new HistoryExam();
+        historyExam.setHistoryId(1L);
+        historyExam.setHistoryExamId(1L);
+        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryScore(10);
+        historyExam.setHistoryTime(30);
+
+        return historyExam;
+    }
+
+    public HistoryExam gethistoryCreateMock(){
+
+        HistoryExam historyExam = new HistoryExam();
+        historyExam.setHistoryId(1L);
+        historyExam.setHistoryExamId(1L);
+        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryScore(10);
+        historyExam.setHistoryTime(30);
+
+        return historyExam;
+    }
 }

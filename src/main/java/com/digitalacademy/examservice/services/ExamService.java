@@ -193,4 +193,12 @@ public class ExamService {
         return getHistoryUser;
     }
 
+    public List<HistoryExam> getHistoryExam(){
+        return historyExamRepository.findAll();
+    }
+
+    public HistoryExam createHistoryExam(HistoryExam boby){
+        return historyExamRepository.save(boby);
+    }
+
 }

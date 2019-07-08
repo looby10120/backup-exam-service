@@ -1,7 +1,9 @@
 package com.digitalacademy.examservice.models;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -28,10 +30,6 @@ public class HistoryExam {
     private Integer historyScore;
 
     private Integer historyTime;
-
-    @NotNull
-    @Size(min = 1, max = 11, message = "Please type your History time")
-    private char historyActive;
 
     @Column
     @UpdateTimestamp
