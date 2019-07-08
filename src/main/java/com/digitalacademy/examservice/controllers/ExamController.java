@@ -88,20 +88,21 @@ public class ExamController {
         return ResponseEntity.ok(new ResponseModel(status, historyExam));
     }
 
-    @RequestMapping(path = "/list_history")
+    /*@RequestMapping(path = "/list_history")
     public List<HistoryExam> getAllHistory() {
         List<HistoryExam> resp = examService.getHistoryExam();
         return resp;
-    }
+    }*/
 
     @PostMapping("/create_history")
     public ResponseEntity<?> createHistoryExam(@Valid @RequestBody HistoryExam body) {
 
         HistoryExam historyExam = examService.createHistoryExam(body);
         StatusModel status = new StatusModel(
-                StatusResponse.GET_RESPONSE_SUCCESS.getCode(), StatusResponse.GET_RESPONSE_SUCCESS.getMessage()
+                StatusResponse.GET_CREATED_SUCCESS.getCode(), StatusResponse.GET_CREATED_SUCCESS.getMessage()
         );
-        return ResponseEntity.ok(new ResponseModel(status, "Save history success."));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseModel(status));
     }
+
 
 }

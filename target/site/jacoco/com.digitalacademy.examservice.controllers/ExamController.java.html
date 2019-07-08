@@ -88,21 +88,22 @@ public class ExamController {
 <span class="fc" id="L88">        return ResponseEntity.ok(new ResponseModel(status, historyExam));</span>
     }
 
-    @RequestMapping(path = &quot;/list_history&quot;)
+    /*@RequestMapping(path = &quot;/list_history&quot;)
     public List&lt;HistoryExam&gt; getAllHistory() {
-<span class="nc" id="L93">        List&lt;HistoryExam&gt; resp = examService.getHistoryExam();</span>
-<span class="nc" id="L94">        return resp;</span>
-    }
+        List&lt;HistoryExam&gt; resp = examService.getHistoryExam();
+        return resp;
+    }*/
 
     @PostMapping(&quot;/create_history&quot;)
     public ResponseEntity&lt;?&gt; createHistoryExam(@Valid @RequestBody HistoryExam body) {
 
-<span class="nc" id="L100">        HistoryExam historyExam = examService.createHistoryExam(body);</span>
-<span class="nc" id="L101">        StatusModel status = new StatusModel(</span>
-<span class="nc" id="L102">                StatusResponse.GET_RESPONSE_SUCCESS.getCode(), StatusResponse.GET_RESPONSE_SUCCESS.getMessage()</span>
+<span class="fc" id="L100">        HistoryExam historyExam = examService.createHistoryExam(body);</span>
+<span class="fc" id="L101">        StatusModel status = new StatusModel(</span>
+<span class="fc" id="L102">                StatusResponse.GET_CREATED_SUCCESS.getCode(), StatusResponse.GET_CREATED_SUCCESS.getMessage()</span>
         );
-<span class="nc" id="L104">        return ResponseEntity.ok(new ResponseModel(status, &quot;Save history success.&quot;));</span>
+<span class="fc" id="L104">        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseModel(status));</span>
     }
+
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

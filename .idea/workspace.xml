@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="198cc5e8-22b7-44c4-a1a1-b342c511c309" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/controllers/ExamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/controllers/ExamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/models/HistoryExam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/models/HistoryExam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/services/ExamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/services/ExamService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/mock/ExamMockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/mock/ExamMockTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/services/ExamServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/services/ExamServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/digitalacademy/examservice/controllers/ExamController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/digitalacademy/examservice/controllers/ExamController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/digitalacademy/examservice/models/HistoryExam.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/digitalacademy/examservice/models/HistoryExam.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/digitalacademy/examservice/services/ExamService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/digitalacademy/examservice/services/ExamService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/coverage-reports/jacoco-unit.exec" beforeDir="false" afterPath="$PROJECT_DIR$/target/coverage-reports/jacoco-unit.exec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/controller/ExamControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/controller/ExamControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/coverage-reports/jacoco-unit.exec" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/examservice-0.0.1-SNAPSHOT.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/examservice-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
@@ -51,8 +44,6 @@
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.digitalacademy.examservice.services.ExamServiceTest.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.digitalacademy.examservice.controller.ExamControllerTest.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.digitalacademy.examservice.services.ExamServiceTest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/digitalacademy/examservice/mock/ExamMockTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/digitalacademy/examservice/mock/ExamMockTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/digitalacademy/examservice/services/ExamServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/digitalacademy/examservice/services/ExamServiceTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -67,11 +58,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/services/ExamServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="368" column="36" lean-forward="true" selection-start-line="368" selection-start-column="36" selection-end-line="368" selection-end-column="36" />
+            <state relative-caret-position="54">
+              <caret line="335" column="4" selection-start-line="335" selection-start-column="4" selection-end-line="357" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,26 +73,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/services/ExamService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
+            <state relative-caret-position="433">
               <caret line="201" column="5" selection-start-line="201" selection-start-column="5" selection-end-line="201" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/src.zip!/java/util/ArrayList.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/controller/ExamControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17850">
-              <caret line="1256" selection-start-line="1256" selection-end-line="1256" />
+            <state relative-caret-position="366">
+              <caret line="278" column="37" selection-start-line="278" selection-start-column="37" selection-end-line="278" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/mock/ExamMockTest.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/constants/StatusResponse.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="461" column="5" selection-start-line="461" selection-start-column="5" selection-end-line="461" selection-end-column="5" />
+            <state relative-caret-position="150">
+              <caret line="10" column="23" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -109,17 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/controllers/ExamController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
-              <caret line="103" column="81" selection-start-line="103" selection-start-column="81" selection-end-line="103" selection-end-column="81" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/models/HistoryExam.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+            <state relative-caret-position="373">
+              <caret line="107" column="1" lean-forward="true" selection-start-line="107" selection-start-column="1" selection-end-line="107" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -140,9 +122,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/services/ExamService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/models/HistoryExam.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/controllers/ExamController.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/mock/ExamMockTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/services/ExamServiceTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/controllers/ExamController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/controller/ExamControllerTest.java" />
       </list>
     </option>
   </component>
@@ -369,6 +352,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="examservice" type="462c0819:PsiDirectoryNode" />
+              <item name="constants" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="examservice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="backup-exam-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="examservice" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -484,6 +476,22 @@
     </option>
   </component>
   <component name="RunManager" selected="Maven.PACKAGE">
+    <configuration name="ExamControllerTest.createHistory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="examservice" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.digitalacademy.examservice.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.digitalacademy.examservice.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.digitalacademy.examservice.controller.ExamControllerTest" />
+      <option name="METHOD_NAME" value="createHistory" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ExamServiceTest.testCreateCustomer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="examservice" />
       <extension name="coverage">
@@ -615,9 +623,11 @@
       <item itemvalue="Maven.RUN" />
       <item itemvalue="Maven.TEST" />
       <item itemvalue="Maven.PACKAGE" />
+      <item itemvalue="JUnit.ExamControllerTest.createHistory" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ExamControllerTest.createHistory" />
         <item itemvalue="JUnit.ExamServiceTest.testCreateHistoryExam" />
         <item itemvalue="JUnit.ExamServiceTest.testgetHistoryUserDoExam" />
         <item itemvalue="JUnit.ExamServiceTest.testCreateCustomer" />
@@ -638,42 +648,51 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ExamServiceTest_testgetHistoryUserDoExam - 2019.07.08 at 13h 36m 50s.xml">
-      <configuration name="ExamServiceTest.testgetHistoryUserDoExam" configurationId="JUnit" />
+    <history-entry file="ExamControllerTest_createHistory - 2019.07.08 at 14h 38m 46s.xml">
+      <configuration name="ExamControllerTest.createHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ExamServiceTest_testCreateHistoryExam - 2019.07.08 at 13h 38m 34s.xml">
-      <configuration name="ExamServiceTest.testCreateHistoryExam" configurationId="JUnit" />
+    <history-entry file="ExamControllerTest_createHistory - 2019.07.08 at 14h 56m 15s.xml">
+      <configuration name="ExamControllerTest.createHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ExamServiceTest_testCreateHistoryExam - 2019.07.08 at 13h 38m 58s.xml">
-      <configuration name="ExamServiceTest.testCreateHistoryExam" configurationId="JUnit" />
+    <history-entry file="ExamControllerTest_createHistory - 2019.07.08 at 15h 00m 12s.xml">
+      <configuration name="ExamControllerTest.createHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ExamServiceTest_testCreateHistoryExam - 2019.07.08 at 13h 56m 12s.xml">
-      <configuration name="ExamServiceTest.testCreateHistoryExam" configurationId="JUnit" />
+    <history-entry file="ExamControllerTest_createHistory - 2019.07.08 at 15h 02m 36s.xml">
+      <configuration name="ExamControllerTest.createHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ExamServiceTest_testCreateHistoryExam - 2019.07.08 at 13h 59m 44s.xml">
-      <configuration name="ExamServiceTest.testCreateHistoryExam" configurationId="JUnit" />
+    <history-entry file="ExamControllerTest_createHistory - 2019.07.08 at 15h 02m 47s.xml">
+      <configuration name="ExamControllerTest.createHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ExamServiceTest_testCreateHistoryExam - 2019.07.08 at 14h 00m 29s.xml">
-      <configuration name="ExamServiceTest.testCreateHistoryExam" configurationId="JUnit" />
+    <history-entry file="ExamControllerTest_createHistory - 2019.07.08 at 15h 05m 26s.xml">
+      <configuration name="ExamControllerTest.createHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ExamServiceTest_testCreateHistoryExam - 2019.07.08 at 14h 01m 36s.xml">
-      <configuration name="ExamServiceTest.testCreateHistoryExam" configurationId="JUnit" />
+    <history-entry file="ExamControllerTest_createHistory - 2019.07.08 at 15h 05m 45s.xml">
+      <configuration name="ExamControllerTest.createHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ExamServiceTest_testgetHistoryUserDoExam - 2019.07.08 at 14h 03m 07s.xml">
-      <configuration name="ExamServiceTest.testgetHistoryUserDoExam" configurationId="JUnit" />
+    <history-entry file="ExamControllerTest_createHistory - 2019.07.08 at 15h 19m 18s.xml">
+      <configuration name="ExamControllerTest.createHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ExamServiceTest_testCreateHistoryExam - 2019.07.08 at 14h 03m 11s.xml">
-      <configuration name="ExamServiceTest.testCreateHistoryExam" configurationId="JUnit" />
+    <history-entry file="ExamControllerTest_createHistory - 2019.07.08 at 15h 20m 33s.xml">
+      <configuration name="ExamControllerTest.createHistory" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ExamServiceTest_testCreateHistoryExam - 2019.07.08 at 14h 03m 48s.xml">
-      <configuration name="ExamServiceTest.testCreateHistoryExam" configurationId="JUnit" />
+    <history-entry file="ExamControllerTest_createHistory - 2019.07.08 at 15h 21m 55s.xml">
+      <configuration name="ExamControllerTest.createHistory" configurationId="JUnit" />
     </history-entry>
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="820" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2532189" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -686,8 +705,8 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997253" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32967034" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32967034" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" />
@@ -700,6 +719,34 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32967034" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3997253" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32967034" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32967034" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout-to-restore>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -728,6 +775,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.3.2/junit-jupiter-engine-5.3.2.jar!/org/junit/jupiter/engine/execution/ExecutableInvoker.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17850">
@@ -742,31 +796,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/controllers/ExamController.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/mock/ExamMockTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="103" column="81" selection-start-line="103" selection-start-column="81" selection-end-line="103" selection-end-column="81" />
+        <state relative-caret-position="321">
+          <caret line="461" column="5" selection-start-line="461" selection-start-column="5" selection-end-line="461" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/services/ExamServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="335" column="4" selection-start-line="335" selection-start-column="4" selection-end-line="357" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-launcher/1.4.0/junit-platform-launcher-1.4.0.jar!/org/junit/platform/launcher/core/DefaultLauncher.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.3.2/junit-platform-engine-1.3.2.jar!/org/junit/platform/engine/support/hierarchical/HierarchicalTestEngine.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="46" column="34" lean-forward="true" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.3.2/junit-platform-engine-1.3.2.jar!/org/junit/platform/engine/support/hierarchical/HierarchicalTestExecutor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.3.2/junit-platform-engine-1.3.2.jar!/org/junit/platform/engine/support/hierarchical/SameThreadHierarchicalTestExecutorService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="e#870#871#0" expanded="true" />
+            <element signature="e#918#919#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.3.2/junit-platform-engine-1.3.2.jar!/org/junit/platform/engine/support/hierarchical/NodeTestTask.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.3.2/junit-platform-engine-1.3.2.jar!/org/junit/platform/engine/support/hierarchical/ThrowableCollector.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+        <state relative-caret-position="166">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.3.2/junit-jupiter-engine-5.3.2.jar!/org/junit/jupiter/engine/descriptor/TestMethodTestDescriptor.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/constants/StatusResponse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="141" selection-start-line="141" selection-end-line="141" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.3.2/junit-jupiter-engine-5.3.2.jar!/org/junit/jupiter/engine/execution/ExecutableInvoker.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        <state relative-caret-position="150">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -777,27 +873,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.3.2/junit-jupiter-engine-5.3.2.jar!/org/junit/jupiter/engine/descriptor/TestMethodTestDescriptor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="138" selection-start-line="138" selection-end-line="138" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/services/ExamService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
+        <state relative-caret-position="433">
           <caret line="201" column="5" selection-start-line="201" selection-start-column="5" selection-end-line="201" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/mock/ExamMockTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/digitalacademy/examservice/controllers/ExamController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="461" column="5" selection-start-line="461" selection-start-column="5" selection-end-line="461" selection-end-column="5" />
+        <state relative-caret-position="373">
+          <caret line="107" column="1" lean-forward="true" selection-start-line="107" selection-start-column="1" selection-end-line="107" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/services/ExamServiceTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/digitalacademy/examservice/controller/ExamControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="368" column="36" lean-forward="true" selection-start-line="368" selection-start-column="36" selection-end-line="368" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="366">
+          <caret line="278" column="37" selection-start-line="278" selection-start-column="37" selection-end-line="278" selection-end-column="37" />
         </state>
       </provider>
     </entry>

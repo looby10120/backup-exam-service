@@ -4,7 +4,11 @@ import com.digitalacademy.examservice.constants.StatusResponse;
 import com.digitalacademy.examservice.controllers.ExamController;
 import com.digitalacademy.examservice.exceptions.ExamServiceException;
 import com.digitalacademy.examservice.mock.ExamMockTest;
+import com.digitalacademy.examservice.models.HistoryExam;
 import com.digitalacademy.examservice.services.ExamService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
@@ -24,6 +28,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -223,4 +228,55 @@ public class ExamControllerTest {
 
         verify(examService, times(1)).getHistoryUser(requestId);
     }
+
+    public HistoryExam sethistoryCreateMock(){
+
+        HistoryExam historyExam = new HistoryExam();
+        historyExam.setHistoryId(1L);
+        historyExam.setHistoryExamId(1L);
+        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryScore(10);
+        historyExam.setHistoryTime(30);
+
+        return historyExam;
+    }
+
+    public HistoryExam gethistoryCreateMock(){
+
+        HistoryExam historyExam = new HistoryExam();
+        historyExam.setHistoryId(1L);
+        historyExam.setHistoryExamId(1L);
+        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryScore(10);
+        historyExam.setHistoryTime(30);
+
+        return historyExam;
+    }
+
+    @Test
+    @DisplayName("test createHistory return data success")
+    void createHistory() throws Exception{
+
+        HistoryExam historyExamRequest = this.sethistoryCreateMock();
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson = ow.writeValueAsString(historyExamRequest);
+
+        when(examService.createHistoryExam(historyExamRequest)).thenReturn(this.gethistoryCreateMock());
+
+        MvcResult mvcResult = mvc.perform(post("/exam/create_history")
+                .contentType(MediaType.APPLICATION_JSON).content(requestJson))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1000", status.get("code").toString());
+        assertEquals("created success", status.get("message"));
+
+    }
+
 }
