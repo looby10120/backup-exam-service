@@ -1,3 +1,10 @@
-# exam-service
+# Exam Service Documentation
 
-This is backup project
+### Package used
+- Google android's Json
+- Lombok
+- Mockito
+- Jacoco
+- JUnit
+- Spring Boot
+- Swagger 2
