@@ -1,0 +1,4 @@
+com/digitalacademy/examservice/ApplicationTest.class
+com/digitalacademy/examservice/services/ExamServiceTest.class
+com/digitalacademy/examservice/mock/ExamMockTest.class
+com/digitalacademy/examservice/controller/ExamControllerTest.class
