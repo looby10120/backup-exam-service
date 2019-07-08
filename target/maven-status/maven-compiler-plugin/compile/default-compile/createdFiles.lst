@@ -4,6 +4,8 @@ com/digitalacademy/examservice/exceptions/ExamServiceException.class
 com/digitalacademy/examservice/models/response/GetExamResponse.class
 com/digitalacademy/examservice/models/response/GetUserLastDoExam.class
 com/digitalacademy/examservice/models/response/GetHistoryUser.class
+com/digitalacademy/examservice/exceptions/handlers/ExamServiceHandlerException.class
+com/digitalacademy/examservice/interceptors/ExamServiceInterceptor.class
 com/digitalacademy/examservice/constants/StatusResponse.class
 com/digitalacademy/examservice/models/response/GetChoiceResponse.class
 com/digitalacademy/examservice/models/StatusModel.class
@@ -14,6 +16,7 @@ com/digitalacademy/examservice/repositories/ChoiceRepository.class
 com/digitalacademy/examservice/models/Choice.class
 com/digitalacademy/examservice/models/response/GetHistoryUserDoExam.class
 com/digitalacademy/examservice/models/Exam.class
+com/digitalacademy/examservice/interceptors/ExamServiceInterceptorAppConfig.class
 com/digitalacademy/examservice/utils/JsonToObjectConverter.class
 com/digitalacademy/examservice/ExamServiceApplication.class
 com/digitalacademy/examservice/models/ListExam.class

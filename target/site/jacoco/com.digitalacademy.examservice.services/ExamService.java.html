@@ -35,7 +35,7 @@ public class ExamService {
 <span class="fc" id="L35">        this.historyExamRepository = historyExamRepository;</span>
 <span class="fc" id="L36">    }</span>
 
-    public List&lt;GetListExamResponse&gt; getExam() {
+    public List&lt;GetListExamResponse&gt; getExam() throws Exception {
 <span class="fc" id="L39">        List&lt;Exam&gt; examList = examRepository.findAll();</span>
 <span class="fc" id="L40">        List&lt;GetListExamResponse&gt; examResponseList = new ArrayList&lt;&gt;();</span>
 <span class="fc bfc" id="L41" title="All 2 branches covered.">        for (int i = 0; i &lt; examList.size(); i++) {</span>
@@ -55,7 +55,7 @@ public class ExamService {
 
 <span class="fc" id="L56">        Exam exam = examRepository.findAllByExamId(id);</span>
         // if find exam by id but not found ,it will return null and throw 404 not found
-<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (exam == null){</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (exam == null) {</span>
 <span class="nc" id="L59">            throw new ExamServiceException(</span>
                     StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE,
                     HttpStatus.NOT_FOUND
@@ -101,7 +101,7 @@ public class ExamService {
 <span class="fc" id="L101">        return getExamResponse;</span>
     }
 
-    public GetHistoryExamMostResponse getHistoryExamMost() {
+    public GetHistoryExamMostResponse getHistoryExamMost() throws Exception {
 <span class="fc" id="L105">        List&lt;Exam&gt; examList = examRepository.findAll();</span>
 <span class="fc" id="L106">        ArrayList&lt;GetHistoryTopFire&gt; historyArrayList = new ArrayList&lt;&gt;();</span>
         int countLoop;
@@ -142,63 +142,77 @@ public class ExamService {
 <span class="fc" id="L142">        return choiceRepository.findAllByChoiceQuestionId(choice_que_id);</span>
     }
 
-    public GetUserLastDoExam getUserLastDoExam(Long id) {
+    public GetUserLastDoExam getUserLastDoExam(Long id) throws Exception {
 <span class="fc" id="L146">        GetUserLastDoExam getUserLastDoExam = new GetUserLastDoExam();</span>
 
 <span class="fc" id="L148">        ArrayList&lt;HistoryExam&gt; historyExamArrayList = historyExamRepository.findAllByHistoryUserId(id);</span>
+        // if find exam by id but not found ,it will return null and throw 404 not found
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (historyExamArrayList.isEmpty()) {</span>
+<span class="nc" id="L151">            throw new ExamServiceException(</span>
+                    StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE,
+                    HttpStatus.NOT_FOUND
+            );
+        }
+        //end check exam is null
 
-<span class="fc" id="L150">        getUserLastDoExam.setCountDoExam((long) historyExamArrayList.size());</span>
-<span class="fc" id="L151">        getUserLastDoExam.setCountExam((long) examRepository.findAll().size());</span>
+<span class="fc" id="L158">        getUserLastDoExam.setCountDoExam((long) historyExamArrayList.size());</span>
+<span class="fc" id="L159">        getUserLastDoExam.setCountExam((long) examRepository.findAll().size());</span>
 
-<span class="fc" id="L153">        ArrayList&lt;GetUserLastDoExamContent&gt; getUserLastDoExamContentArrayList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L161">        ArrayList&lt;GetUserLastDoExamContent&gt; getUserLastDoExamContentArrayList = new ArrayList&lt;&gt;();</span>
 
         int countLoop;
-<span class="fc bfc" id="L156" title="All 2 branches covered.">        if (historyExamArrayList.size() &lt; 5) {</span>
-<span class="fc" id="L157">            countLoop = historyExamArrayList.size();</span>
+<span class="fc bfc" id="L164" title="All 2 branches covered.">        if (historyExamArrayList.size() &lt; 5) {</span>
+<span class="fc" id="L165">            countLoop = historyExamArrayList.size();</span>
         } else {
-<span class="fc" id="L159">            countLoop = 5;</span>
+<span class="fc" id="L167">            countLoop = 5;</span>
         }
 
-<span class="fc bfc" id="L162" title="All 2 branches covered.">        for (int j = 0; j &lt; countLoop; j++) {</span>
-<span class="fc" id="L163">            GetUserLastDoExamContent getUserLastDoExamContent = new GetUserLastDoExamContent();</span>
-<span class="fc" id="L164">            getUserLastDoExamContent.setExamId(historyExamArrayList.get(j).getHistoryExamId());</span>
-<span class="fc" id="L165">            getUserLastDoExamContent.setExamName(examRepository.findAllByExamId(historyExamArrayList.get(j).getHistoryExamId()).getExamName());</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">        for (int j = 0; j &lt; countLoop; j++) {</span>
+<span class="fc" id="L171">            GetUserLastDoExamContent getUserLastDoExamContent = new GetUserLastDoExamContent();</span>
+<span class="fc" id="L172">            getUserLastDoExamContent.setExamId(historyExamArrayList.get(j).getHistoryExamId());</span>
+<span class="fc" id="L173">            getUserLastDoExamContent.setExamName(examRepository.findAllByExamId(historyExamArrayList.get(j).getHistoryExamId()).getExamName());</span>
 
-<span class="fc" id="L167">            getUserLastDoExamContent.setTimestamp(historyExamArrayList.get(j).getHistoryLastUpdate().getTime());</span>
-<span class="fc" id="L168">            getUserLastDoExamContentArrayList.add(getUserLastDoExamContent);</span>
+<span class="fc" id="L175">            getUserLastDoExamContent.setTimestamp(historyExamArrayList.get(j).getHistoryLastUpdate().getTime());</span>
+<span class="fc" id="L176">            getUserLastDoExamContentArrayList.add(getUserLastDoExamContent);</span>
         }
 
-<span class="fc" id="L171">        getUserLastDoExam.setGetUserLastDoExamContent(getUserLastDoExamContentArrayList);</span>
+<span class="fc" id="L179">        getUserLastDoExam.setGetUserLastDoExamContent(getUserLastDoExamContentArrayList);</span>
 
-<span class="fc" id="L173">        return getUserLastDoExam;</span>
+<span class="fc" id="L181">        return getUserLastDoExam;</span>
     }
 
-    public GetHistoryUser getHistoryUser(Long id) {
-<span class="fc" id="L177">        List&lt;HistoryExam&gt; historyList = historyExamRepository.findAllByHistoryUserId(id);</span>
-<span class="fc" id="L178">        ArrayList&lt;GetHistoryUserDoExam&gt; historyUserDoExam = new ArrayList&lt;&gt;();</span>
+    public GetHistoryUser getHistoryUser(Long id) throws Exception {
+<span class="fc" id="L185">        List&lt;HistoryExam&gt; historyList = historyExamRepository.findAllByHistoryUserId(id);</span>
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">        if (historyList.isEmpty()) {</span>
+<span class="nc" id="L187">            throw new ExamServiceException(</span>
+                    StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE,
+                    HttpStatus.NOT_FOUND
+            );
+        }
+<span class="fc" id="L192">        ArrayList&lt;GetHistoryUserDoExam&gt; historyUserDoExam = new ArrayList&lt;&gt;();</span>
 
-<span class="fc bfc" id="L180" title="All 2 branches covered.">        for (int i = 0; i &lt; historyList.size(); i++) {</span>
-<span class="fc" id="L181">            GetHistoryUserDoExam historyAll = new GetHistoryUserDoExam();</span>
-<span class="fc" id="L182">            historyAll.setExamId(historyList.get(i).getHistoryExamId());</span>
-<span class="fc" id="L183">            historyAll.setExamName(examRepository.findAllByExamId(historyList.get(i).getHistoryExamId()).getExamName());</span>
-<span class="fc" id="L184">            historyAll.setExamTotalScore(examRepository.findAllByExamId(historyList.get(i).getHistoryExamId()).getExamTotalScore());</span>
-<span class="fc" id="L185">            historyAll.setPointExam(historyList.get(i).getHistoryScore());</span>
-<span class="fc" id="L186">            historyAll.setTimestamp(historyList.get(i).getHistoryLastUpdate());</span>
-<span class="fc" id="L187">            historyUserDoExam.add(historyAll);</span>
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        for (int i = 0; i &lt; historyList.size(); i++) {</span>
+<span class="fc" id="L195">            GetHistoryUserDoExam historyAll = new GetHistoryUserDoExam();</span>
+<span class="fc" id="L196">            historyAll.setExamId(historyList.get(i).getHistoryExamId());</span>
+<span class="fc" id="L197">            historyAll.setExamName(examRepository.findAllByExamId(historyList.get(i).getHistoryExamId()).getExamName());</span>
+<span class="fc" id="L198">            historyAll.setExamTotalScore(examRepository.findAllByExamId(historyList.get(i).getHistoryExamId()).getExamTotalScore());</span>
+<span class="fc" id="L199">            historyAll.setPointExam(historyList.get(i).getHistoryScore());</span>
+<span class="fc" id="L200">            historyAll.setTimestamp(historyList.get(i).getHistoryLastUpdate());</span>
+<span class="fc" id="L201">            historyUserDoExam.add(historyAll);</span>
         }
 
-<span class="fc" id="L190">        GetHistoryUser getHistoryUser = new GetHistoryUser();</span>
-<span class="fc" id="L191">        getHistoryUser.setGetHistoryUserDoExam(historyUserDoExam);</span>
+<span class="fc" id="L204">        GetHistoryUser getHistoryUser = new GetHistoryUser();</span>
+<span class="fc" id="L205">        getHistoryUser.setGetHistoryUserDoExam(historyUserDoExam);</span>
 
-<span class="fc" id="L193">        return getHistoryUser;</span>
+<span class="fc" id="L207">        return getHistoryUser;</span>
     }
 
     public List&lt;HistoryExam&gt; getHistoryExam(){
-<span class="nc" id="L197">        return historyExamRepository.findAll();</span>
+<span class="nc" id="L211">        return historyExamRepository.findAll();</span>
     }
 
     public HistoryExam createHistoryExam(HistoryExam boby){
-<span class="fc" id="L201">        return historyExamRepository.save(boby);</span>
+<span class="fc" id="L215">        return historyExamRepository.save(boby);</span>
     }
 
 }

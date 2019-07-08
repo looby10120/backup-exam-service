@@ -59,7 +59,7 @@ public class ExamServiceTest {
 
     @DisplayName("Test get list all exam should return exam id and exam name")
     @Test
-    void testGetAllExam() {
+    void testGetAllExam() throws Exception {
         when(examRepository.findAll()).thenReturn(examMockTest.getListExamAllService());
         when(questionRepository.countByQuestionExamId(1L)).thenReturn(10L);
         when(questionRepository.countByQuestionExamId(2L)).thenReturn(10L);
@@ -196,6 +196,7 @@ public class ExamServiceTest {
         assertEquals("1", resp.getExamId().toString());
         assertEquals("Exam mock", resp.getExamName());
         assertEquals("1+1", resp.getQuestionsResponseArray().get(0).getGetQuestionHeadResponse().getQuestionText());
+
         assertEquals("2*5", resp.getQuestionsResponseArray().get(1).getGetQuestionHeadResponse().getQuestionText());
         assertEquals("7", resp.getQuestionsResponseArray().get(1).getGetChoiceResponseArray().get(0).getChoiceText());
         assertEquals("8", resp.getQuestionsResponseArray().get(1).getGetChoiceResponseArray().get(1).getChoiceText());
@@ -217,7 +218,7 @@ public class ExamServiceTest {
         when(questionRepository.countByQuestionExamId(requestParam)).thenReturn(2L);
         when(questionRepository.countByQuestionExamId(requestParam2)).thenReturn(10L);
 
-       GetHistoryExamMostResponse resp = this.examService.getHistoryExamMost();
+        GetHistoryExamMostResponse resp = this.examService.getHistoryExamMost();
         assertEquals("1", resp.getGetHistoryTopFireArrayList().get(1).getExamId().toString());
         assertEquals("Test001", resp.getGetHistoryTopFireArrayList().get(1).getExamName());
         assertEquals("4", resp.getGetHistoryTopFireArrayList().get(1).getCountAllDo().toString());
@@ -333,36 +334,13 @@ public class ExamServiceTest {
         assertEquals(8, resp.getGetHistoryUserDoExam().get(0).getPointExam());
     }
 
-    public HistoryExam sethistoryCreateMock(){
-
-        HistoryExam historyExam = new HistoryExam();
-        historyExam.setHistoryId(1L);
-        historyExam.setHistoryExamId(1L);
-        historyExam.setHistoryUserId(1L);
-        historyExam.setHistoryScore(10);
-        historyExam.setHistoryTime(30);
-
-        return historyExam;
-    }
-
-    public HistoryExam gethistoryCreateMock(){
-
-        HistoryExam historyExam = new HistoryExam();
-        historyExam.setHistoryId(1L);
-        historyExam.setHistoryExamId(1L);
-        historyExam.setHistoryUserId(1L);
-        historyExam.setHistoryScore(10);
-        historyExam.setHistoryTime(30);
-
-        return historyExam;
-    }
 
     @DisplayName("Test create history should return list")
     @Test
     void testCreateHistoryExam() {
 
-        when(historyExamRepository.save(sethistoryCreateMock())).thenReturn(gethistoryCreateMock());
-        HistoryExam resp = examService.createHistoryExam(gethistoryCreateMock());
+        when(historyExamRepository.save(examMockTest.sethistoryCreateMock())).thenReturn(examMockTest.gethistoryCreateMock());
+        HistoryExam resp = examService.createHistoryExam(examMockTest.gethistoryCreateMock());
         log.info("Get History By Id:");
 
         assertEquals("1", resp.getHistoryId().toString());
@@ -371,5 +349,4 @@ public class ExamServiceTest {
         assertEquals("10", resp.getHistoryScore().toString());
         assertEquals("30", resp.getHistoryTime().toString());
     }
-
 }

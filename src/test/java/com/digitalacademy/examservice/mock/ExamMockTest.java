@@ -437,7 +437,8 @@ public class ExamMockTest {
         return getHistory;
     }
 
-    public HistoryExam sethistoryCreateMock(){
+
+    public static HistoryExam sethistoryCreateMock(){
 
         HistoryExam historyExam = new HistoryExam();
         historyExam.setHistoryId(1L);
@@ -449,7 +450,7 @@ public class ExamMockTest {
         return historyExam;
     }
 
-    public HistoryExam gethistoryCreateMock(){
+    public static HistoryExam gethistoryCreateMock(){
 
         HistoryExam historyExam = new HistoryExam();
         historyExam.setHistoryId(1L);

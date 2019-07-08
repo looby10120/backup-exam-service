@@ -35,7 +35,7 @@ public class ExamService {
         this.historyExamRepository = historyExamRepository;
     }
 
-    public List<GetListExamResponse> getExam() {
+    public List<GetListExamResponse> getExam() throws Exception {
         List<Exam> examList = examRepository.findAll();
         List<GetListExamResponse> examResponseList = new ArrayList<>();
         for (int i = 0; i < examList.size(); i++) {
@@ -55,7 +55,7 @@ public class ExamService {
 
         Exam exam = examRepository.findAllByExamId(id);
         // if find exam by id but not found ,it will return null and throw 404 not found
-        if (exam == null){
+        if (exam == null) {
             throw new ExamServiceException(
                     StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE,
                     HttpStatus.NOT_FOUND
@@ -101,7 +101,7 @@ public class ExamService {
         return getExamResponse;
     }
 
-    public GetHistoryExamMostResponse getHistoryExamMost() {
+    public GetHistoryExamMostResponse getHistoryExamMost() throws Exception {
         List<Exam> examList = examRepository.findAll();
         ArrayList<GetHistoryTopFire> historyArrayList = new ArrayList<>();
         int countLoop;
@@ -142,10 +142,18 @@ public class ExamService {
         return choiceRepository.findAllByChoiceQuestionId(choice_que_id);
     }
 
-    public GetUserLastDoExam getUserLastDoExam(Long id) {
+    public GetUserLastDoExam getUserLastDoExam(Long id) throws Exception {
         GetUserLastDoExam getUserLastDoExam = new GetUserLastDoExam();
 
         ArrayList<HistoryExam> historyExamArrayList = historyExamRepository.findAllByHistoryUserId(id);
+        // if find exam by id but not found ,it will return null and throw 404 not found
+        if (historyExamArrayList.isEmpty()) {
+            throw new ExamServiceException(
+                    StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE,
+                    HttpStatus.NOT_FOUND
+            );
+        }
+        //end check exam is null
 
         getUserLastDoExam.setCountDoExam((long) historyExamArrayList.size());
         getUserLastDoExam.setCountExam((long) examRepository.findAll().size());
@@ -173,8 +181,14 @@ public class ExamService {
         return getUserLastDoExam;
     }
 
-    public GetHistoryUser getHistoryUser(Long id) {
+    public GetHistoryUser getHistoryUser(Long id) throws Exception {
         List<HistoryExam> historyList = historyExamRepository.findAllByHistoryUserId(id);
+        if (historyList.isEmpty()) {
+            throw new ExamServiceException(
+                    StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE,
+                    HttpStatus.NOT_FOUND
+            );
+        }
         ArrayList<GetHistoryUserDoExam> historyUserDoExam = new ArrayList<>();
 
         for (int i = 0; i < historyList.size(); i++) {

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class StatusModel {
 
     @JsonProperty("code")
-    private String code;
+    private int code;
 
     @JsonProperty("message")
     private String message;
@@ -13,7 +13,7 @@ public class StatusModel {
     public StatusModel() {
     }
 
-    public StatusModel(String code, String message) {
+    public StatusModel(int code, String message) {
         this.code = code;
         this.message = message;
     }
