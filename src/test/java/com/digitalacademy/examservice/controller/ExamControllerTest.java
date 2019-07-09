@@ -447,4 +447,146 @@ public class ExamControllerTest {
         assertEquals("1499", status.get("code").toString());
         assertEquals("bad request", status.get("message"));
     }
+
+    @DisplayName("")
+    @Test
+    void testGetAllExamFailWrongPath() throws Exception {
+        when(examService.getExam()).thenThrow(new ExamServiceException(StatusResponse.GET_REQUEST_WRONG_URL_PATH, HttpStatus.NOT_FOUND));
+
+        MvcResult mvcResult = mvc.perform(get("/exam/list"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1999", status.get("code").toString());
+        assertEquals("request wrong URL path", status.get("message"));
+
+    }
+
+//    @DisplayName("Test get exam by id 1 should return question and answer")
+//    @Test
+//    void testGetAllExamFailWithSpace() throws Exception {
+//        when(examService.getExam()).thenThrow(new ExamServiceException(StatusResponse.GET_BAD_REQUEST, HttpStatus.BAD_REQUEST));
+//
+//        doThrow(Exception.class).when(examService).createHistoryExam(historyExamRequest);
+//
+//        MvcResult mvcResult = mvc.perform(get("/exam/list"))
+//                .andExpect(status().isBadRequest())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+//                .andReturn();
+//
+//        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+//        JSONObject status = new JSONObject(resp.getString("status"));
+//
+//        assertEquals("1499", status.get("code").toString());
+//        assertEquals("bad request", status.get("message"));
+//
+//    }
+
+    @DisplayName("")
+    @Test
+    void testGetAllExamFailDeathServer() throws Exception {
+        when(examService.getExam()).thenThrow(new Exception());
+
+        MvcResult mvcResult = mvc.perform(get("/exam/list_exam"))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+//        JSONArray data = new JSONArray(resp.getString("data"));
+
+        assertEquals("9900", status.get("code").toString());
+        assertEquals("death server", status.get("message"));
+
+//        verify(examService, times(1)).getExam();
+    }
+
+    @DisplayName("")
+    @Test
+    void testGetHistoryUserFailDeathServer() throws Exception {
+        Long requestId = 1L;
+        when(examService.getHistoryUser(requestId)).thenThrow(new Exception());
+
+        MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+//        JSONArray data = new JSONArray(resp.getString("data"));
+
+        assertEquals("9900", status.get("code").toString());
+        assertEquals("death server", status.get("message"));
+
+//        verify(examService, times(1)).getExam();
+    }
+
+    @DisplayName("")
+    @Test
+    void testGetHistoryUserFailPathSpace() throws Exception {
+        String requestId = "1  ";
+//        when(examService.getHistoryUser(requestId)).thenThrow(new Exception());
+
+        MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+//        JSONArray data = new JSONArray(resp.getString("data"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+
+//        verify(examService, times(1)).getExam();
+    }
+
+    @DisplayName("")
+    @Test
+    void testGetHistoryUserFailNumberFormat() throws Exception {
+//        Long requestId = 1L;
+//        when(examService.getHistoryUser(requestId)).thenThrow(new Exception());
+
+        MvcResult mvcResult = mvc.perform(get("/exam/history/1e"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+//        JSONArray data = new JSONArray(resp.getString("data"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+
+//        verify(examService, times(1)).getExam();
+    }
+
+    @DisplayName("")
+    @Test
+    void testGetHistoryUserFail() throws Exception {
+        Long requestId = 100L;
+        when(examService.getHistoryUser(requestId)).thenThrow(new ExamServiceException(StatusResponse.GET_BAD_REQUEST, HttpStatus.BAD_REQUEST));
+
+        MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+//        JSONArray data = new JSONArray(resp.getString("data"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+
+//        verify(examService, times(1)).getExam();
+    }
 }
