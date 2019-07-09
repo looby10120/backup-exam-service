@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -183,19 +184,30 @@ public class ExamController {
     }
 
 
-    /*@RequestMapping(path = "/list_history")
-    public List<HistoryExam> getAllHistory() {
-        List<HistoryExam> resp = examService.getHistoryExam();
-        return resp;
-    }*/
-
     @PostMapping("/create_history")
-    public ResponseEntity<?> createHistoryExam(@Valid @RequestBody HistoryExam body) {
+    public HttpEntity<ResponseModel> createHistoryExam(@Valid @RequestBody HistoryExam body, Errors error) throws ExamServiceException {
 
-        HistoryExam historyExam = examService.createHistoryExam(body);
-        StatusModel status = new StatusModel(
-                StatusResponse.GET_CREATED_SUCCESS.getCode(), StatusResponse.GET_CREATED_SUCCESS.getMessage()
-        );
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseModel(status));
+        if(error.hasErrors()){
+            throw new ExamServiceException(
+                    StatusResponse.GET_BAD_REQUEST,
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+        try {
+            HistoryExam historyExam = examService.createHistoryExam(body);
+            StatusModel status = new StatusModel(
+                    StatusResponse.GET_CREATED_SUCCESS.getCode(), StatusResponse.GET_CREATED_SUCCESS.getMessage()
+            );
+            return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseModel(status));
+        } catch (Exception e) {
+            StatusResponse statusResponse = StatusResponse.GET_DEATH_SERVER;
+
+            return new ResponseModel(
+                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
+            ).build(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
     }
+
 }
