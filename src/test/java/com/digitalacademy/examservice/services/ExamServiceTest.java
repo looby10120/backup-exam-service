@@ -321,7 +321,6 @@ public class ExamServiceTest {
     @DisplayName("Test get all exam user do return list all exam history")
     @Test
     void testgetHistoryUserDoExam() throws Exception {
-//        Date date = new Date();
         Long requestParam = 1L;
         when(historyExamRepository.findAllByHistoryUserId(requestParam)).thenReturn(examMockTest.historyExam());
         when(examRepository.findAllByExamId(requestParam)).thenReturn(examMockTest.getAllExamMock());
@@ -329,8 +328,6 @@ public class ExamServiceTest {
         GetHistoryUser resp = this.examService.getHistoryUser(requestParam);
         assertEquals("1", resp.getGetHistoryUserDoExam().get(0).getExamId().toString());
         assertEquals("Exam mock", resp.getGetHistoryUserDoExam().get(0).getExamName());
-//        assertEquals(date, resp.getGetHistoryUserDoExam().get(0).getTimestamp());
-//        assertEquals(10, resp.getGetHistoryUserDoExam().get(0).getExamTotalScore());
         assertEquals(8, resp.getGetHistoryUserDoExam().get(0).getPointExam());
     }
 
