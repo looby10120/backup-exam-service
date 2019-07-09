@@ -3,7 +3,6 @@ package com.digitalacademy.examservice.controller;
 import com.digitalacademy.examservice.constants.StatusResponse;
 import com.digitalacademy.examservice.controllers.ExamController;
 import com.digitalacademy.examservice.exceptions.ExamServiceException;
-import com.digitalacademy.examservice.exceptions.handlers.ExamServiceHandlerException;
 import com.digitalacademy.examservice.mock.ExamMockTest;
 import com.digitalacademy.examservice.models.HistoryExam;
 import com.digitalacademy.examservice.services.ExamService;
@@ -49,10 +48,7 @@ public class ExamControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         examController = new ExamController(examService);
-        mvc = MockMvcBuilders
-                .standaloneSetup(examController)
-                .setControllerAdvice(new ExamServiceHandlerException())
-                .build();
+        mvc = MockMvcBuilders.standaloneSetup(examController).build();
     }
 
     @DisplayName("Test get list all exam should return exam id and exam name")
@@ -124,6 +120,7 @@ public class ExamControllerTest {
 
         verify(examService, times(1)).getExamById(requestId);
     }
+
     @DisplayName("Test get exam by id 1 should return question and answer")
     @Test
     void testGetExamByIdWithSpace() throws Exception {
@@ -144,14 +141,14 @@ public class ExamControllerTest {
     @Test
     void testGetExamByIdNumberFormatException() throws Exception {
         MvcResult mvcResult = mvc.perform(get("/exam/" + "e"))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andReturn();
 
         JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
         JSONObject status = new JSONObject(resp.getString("status"));
 
-        assertEquals("1999", status.get("code").toString());
-        assertEquals("request wrong URL path", status.get("message"));
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
 
     }
 
@@ -185,12 +182,14 @@ public class ExamControllerTest {
                 .andReturn();
 
         JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        //  log.info("resp : "+ resp);
         JSONObject status = new JSONObject(resp.getString("status"));
         JSONObject data = new JSONObject(resp.getString("data"));
         JSONArray history_most_do = new JSONArray(data.getString("history_most_do"));
 
         assertEquals("1000", status.get("code").toString());
         assertEquals("success", status.get("message"));
+        // log.info("history_most_do[{}] : "+ history_most_do.getJSONObject(0).get("exam_id"));
 
         assertEquals("1", history_most_do.getJSONObject(0).get("exam_id").toString());
         assertEquals("Test001", history_most_do.getJSONObject(0).get("exam_name").toString());
@@ -328,6 +327,73 @@ public class ExamControllerTest {
 
     }
 
+    @DisplayName("Test get list top 5 history exam should return exam id and exam name")
+    @Test
+    void testGetUserLastDoExamWithSpace() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + "  1  "))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+
+    }
+
+    @DisplayName("Test get exam by id 1 should return question and answer")
+    @Test
+    void testGetUserLastDoExamInternalServerError() throws Exception {
+        Long requestId = 100L;
+        when(examService.getUserLastDoExam(requestId)).thenThrow(new Exception());
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + requestId))
+                .andExpect(status().isInternalServerError())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("9900", status.get("code").toString());
+        assertEquals("death server", status.get("message"));
+
+        verify(examService, times(1)).getUserLastDoExam(requestId);
+    }
+
+    @DisplayName("Test get exam by id 1 should return question and answer")
+    @Test
+    void testGetUserLastDoExamNumberFormatException() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + "e"))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+    }
+
+    @DisplayName("Test get exam by id 1 should return question and answer")
+    @Test
+    void testGetUserLastDoExamFail() throws Exception {
+        Long requestId = 101L;
+        when(examService.getUserLastDoExam(requestId)).thenThrow(new ExamServiceException(StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE, HttpStatus.NOT_FOUND));
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + requestId))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1699", status.get("code").toString());
+        assertEquals("not found resource in database", status.get("message"));
+
+        verify(examService, times(1)).getUserLastDoExam(requestId);
+    }
+
+
     @DisplayName("Test createHistoryInternalServerError")
     @Test
     void testCreateHistoryInternalServerError() throws Exception {
@@ -378,5 +444,4 @@ public class ExamControllerTest {
         assertEquals("1499", status.get("code").toString());
         assertEquals("bad request", status.get("message"));
     }
-
 }
