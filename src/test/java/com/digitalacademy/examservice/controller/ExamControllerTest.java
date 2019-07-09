@@ -285,4 +285,70 @@ public class ExamControllerTest {
         assertEquals("created success", status.get("message"));
 
     }
+
+    @DisplayName("Test get list top 5 history exam should return exam id and exam name")
+    @Test
+    void testGetUserLastDoExamWithSpace() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + "  1  "))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+
+    }
+
+    @DisplayName("Test get exam by id 1 should return question and answer")
+    @Test
+    void testGetUserLastDoExamInternalServerError() throws Exception {
+        Long requestId = 100L;
+        when(examService.getUserLastDoExam(requestId)).thenThrow(new Exception());
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + requestId))
+                .andExpect(status().isInternalServerError())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("9900", status.get("code").toString());
+        assertEquals("death server", status.get("message"));
+
+        verify(examService, times(1)).getUserLastDoExam(requestId);
+    }
+
+    @DisplayName("Test get exam by id 1 should return question and answer")
+    @Test
+    void testGetUserLastDoExamNumberFormatException() throws Exception {
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + "e"))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+    }
+
+    @DisplayName("Test get exam by id 1 should return question and answer")
+    @Test
+    void testGetUserLastDoExamFail() throws Exception {
+        Long requestId = 101L;
+        when(examService.getUserLastDoExam(requestId)).thenThrow(new ExamServiceException(StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE, HttpStatus.NOT_FOUND));
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + requestId))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1699", status.get("code").toString());
+        assertEquals("not found resource in database", status.get("message"));
+
+        verify(examService, times(1)).getUserLastDoExam(requestId);
+    }
 }

@@ -207,12 +207,8 @@ public class ExamService {
 <span class="fc" id="L207">        return getHistoryUser;</span>
     }
 
-    public List&lt;HistoryExam&gt; getHistoryExam(){
-<span class="nc" id="L211">        return historyExamRepository.findAll();</span>
-    }
-
     public HistoryExam createHistoryExam(HistoryExam boby){
-<span class="fc" id="L215">        return historyExamRepository.save(boby);</span>
+<span class="fc" id="L211">        return historyExamRepository.save(boby);</span>
     }
 
 }

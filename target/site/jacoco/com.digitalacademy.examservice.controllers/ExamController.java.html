@@ -113,11 +113,11 @@ public class ExamController {
 
     @GetMapping(&quot;/last_exam/{id}&quot;)
     public HttpEntity&lt;ResponseModel&gt; getUserLastDoExam(@PathVariable String id) {
-<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        if (id.trim().length() != id.length()) {</span>
-<span class="nc" id="L117">            StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;</span>
-<span class="nc" id="L118">            return new ResponseModel(</span>
-<span class="nc" id="L119">                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())</span>
-<span class="nc" id="L120">            ).build(HttpStatus.BAD_REQUEST);</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        if (id.trim().length() != id.length()) {</span>
+<span class="fc" id="L117">            StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;</span>
+<span class="fc" id="L118">            return new ResponseModel(</span>
+<span class="fc" id="L119">                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())</span>
+<span class="fc" id="L120">            ).build(HttpStatus.BAD_REQUEST);</span>
         }
         try {
 <span class="fc" id="L123">            Long longId = Long.valueOf(id);</span>
@@ -126,24 +126,24 @@ public class ExamController {
 <span class="fc" id="L126">                    StatusResponse.GET_RESPONSE_SUCCESS.getCode(), StatusResponse.GET_RESPONSE_SUCCESS.getMessage()</span>
             );
 <span class="fc" id="L128">            return ResponseEntity.ok(new ResponseModel(status, getUserLastDoExam));</span>
-<span class="nc" id="L129">        } catch (NumberFormatException e) {</span>
-<span class="nc" id="L130">            StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;</span>
+<span class="fc" id="L129">        } catch (NumberFormatException e) {</span>
+<span class="fc" id="L130">            StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;</span>
 
-<span class="nc" id="L132">            return new ResponseModel(</span>
-<span class="nc" id="L133">                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())</span>
-<span class="nc" id="L134">            ).build(HttpStatus.BAD_REQUEST);</span>
-<span class="nc" id="L135">        } catch (ExamServiceException e) {</span>
-<span class="nc" id="L136">            StatusResponse statusResponse = e.getStatusResponse();</span>
+<span class="fc" id="L132">            return new ResponseModel(</span>
+<span class="fc" id="L133">                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())</span>
+<span class="fc" id="L134">            ).build(HttpStatus.BAD_REQUEST);</span>
+<span class="fc" id="L135">        } catch (ExamServiceException e) {</span>
+<span class="fc" id="L136">            StatusResponse statusResponse = e.getStatusResponse();</span>
 
-<span class="nc" id="L138">            return ResponseEntity.status(e.getHttpStatus()).body(new ResponseModel(</span>
-<span class="nc" id="L139">                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())</span>
+<span class="fc" id="L138">            return ResponseEntity.status(e.getHttpStatus()).body(new ResponseModel(</span>
+<span class="fc" id="L139">                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())</span>
             ));
-<span class="nc" id="L141">        } catch (Exception e) {</span>
-<span class="nc" id="L142">            StatusResponse statusResponse = StatusResponse.GET_DEATH_SERVER;</span>
+<span class="fc" id="L141">        } catch (Exception e) {</span>
+<span class="fc" id="L142">            StatusResponse statusResponse = StatusResponse.GET_DEATH_SERVER;</span>
 
-<span class="nc" id="L144">            return new ResponseModel(</span>
-<span class="nc" id="L145">                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())</span>
-<span class="nc" id="L146">            ).build(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+<span class="fc" id="L144">            return new ResponseModel(</span>
+<span class="fc" id="L145">                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())</span>
+<span class="fc" id="L146">            ).build(HttpStatus.INTERNAL_SERVER_ERROR);</span>
         }
     }
 

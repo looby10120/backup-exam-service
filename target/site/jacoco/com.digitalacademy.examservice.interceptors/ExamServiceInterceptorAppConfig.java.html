@@ -3,17 +3,18 @@
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Component
-<span class="fc" id="L9">public class ExamServiceInterceptorAppConfig extends WebMvcConfigurerAdapter {</span>
+<span class="fc" id="L10">public class ExamServiceInterceptorAppConfig implements WebMvcConfigurer {</span>
 
     @Autowired
     com.digitalacademy.examservice.interceptors.ExamServiceInterceptor examServiceInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-<span class="fc" id="L16">        registry.addInterceptor(examServiceInterceptor);</span>
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L17">        registry.addInterceptor(examServiceInterceptor);</span>
+<span class="fc" id="L18">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
