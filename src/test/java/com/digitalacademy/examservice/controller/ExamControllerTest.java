@@ -3,6 +3,7 @@ package com.digitalacademy.examservice.controller;
 import com.digitalacademy.examservice.constants.StatusResponse;
 import com.digitalacademy.examservice.controllers.ExamController;
 import com.digitalacademy.examservice.exceptions.ExamServiceException;
+import com.digitalacademy.examservice.exceptions.handlers.ExamServiceHandlerException;
 import com.digitalacademy.examservice.mock.ExamMockTest;
 import com.digitalacademy.examservice.models.HistoryExam;
 import com.digitalacademy.examservice.services.ExamService;
@@ -48,7 +49,9 @@ public class ExamControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         examController = new ExamController(examService);
-        mvc = MockMvcBuilders.standaloneSetup(examController).build();
+        mvc = MockMvcBuilders.standaloneSetup(examController)
+                .setControllerAdvice(new ExamServiceHandlerException())
+                .build();
     }
 
     @DisplayName("Test get list all exam should return exam id and exam name")
@@ -421,27 +424,27 @@ public class ExamControllerTest {
         verify(examService, times(1)).createHistoryExam(historyExamRequest);
     }
 
-//    @DisplayName("Test testCreateHistoryBadRequest")
-//    @Test
-//    void testCreateHistoryBadRequest() throws Exception {
-//
-//        HistoryExam historyExamRequest = examMockTest.gethistoryCreateBodyFailMock();
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-//        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-//        String requestJson = ow.writeValueAsString(historyExamRequest);
-//
-//
-//        MvcResult mvcResult = mvc.perform(post("/exam/create_history")
-//                .contentType(MediaType.APPLICATION_JSON).content(requestJson))
-//                .andExpect(status().isBadRequest())
-//                .andReturn();
-//
-//        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
-//        JSONObject status = new JSONObject(resp.getString("status"));
-//
-//        assertEquals("1499", status.get("code").toString());
-//        assertEquals("bad request", status.get("message"));
-//    }
+    @DisplayName("Test testCreateHistoryBadRequest")
+    @Test
+    void testCreateHistoryBadRequest() throws Exception {
+
+        HistoryExam historyExamRequest = examMockTest.gethistoryCreateBodyFailMock();
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson = ow.writeValueAsString(historyExamRequest);
+
+
+        MvcResult mvcResult = mvc.perform(post("/exam/create_history")
+                .contentType(MediaType.APPLICATION_JSON).content(requestJson))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+    }
 }
