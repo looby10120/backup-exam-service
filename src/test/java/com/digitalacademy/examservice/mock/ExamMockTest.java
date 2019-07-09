@@ -470,4 +470,9 @@ public class ExamMockTest {
         return historyExam;
     }
 
+    public static ArrayList<HistoryExam> historyExamEmpty() {
+        ArrayList<HistoryExam> history = new ArrayList<>();
+        return history;
+    }
+
 }

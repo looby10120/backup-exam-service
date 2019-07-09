@@ -213,7 +213,7 @@ public class ExamControllerTest {
 
         when(examService.getHistoryExamMost()).thenReturn(examMockTest.getHistoryExamTop5Mock());
 
-        MvcResult mvcResult = mvc.perform(get("/exam/exam_most"+ "er"))
+        MvcResult mvcResult = mvc.perform(get("/exam/exam_most" + "er"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andReturn();

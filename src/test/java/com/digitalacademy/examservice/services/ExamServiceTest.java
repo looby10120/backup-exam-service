@@ -1,5 +1,6 @@
 package com.digitalacademy.examservice.services;
 
+import com.digitalacademy.examservice.exceptions.ExamServiceException;
 import com.digitalacademy.examservice.mock.ExamMockTest;
 import com.digitalacademy.examservice.models.Choice;
 import com.digitalacademy.examservice.models.HistoryExam;
@@ -26,8 +27,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -346,4 +346,30 @@ public class ExamServiceTest {
         assertEquals("10", resp.getHistoryScore().toString());
         assertEquals("30", resp.getHistoryTime().toString());
     }
+
+
+    @DisplayName("Test last do exam with array empty then throws 1699")
+    @Test
+    void testGetUserLastDoExamWithArrayEmpty() throws Exception {
+        Long requestParam = 2L;
+        when(historyExamRepository.findAllByHistoryUserId(requestParam)).thenReturn(examMockTest.historyExamEmpty());
+        ExamServiceException thrown = assertThrows(ExamServiceException.class,
+                () -> examService.getUserLastDoExam(requestParam),
+                "Expected getUserLastDoExam(requestParam) to throw, but it did't");
+        assertEquals(1699,thrown.getStatusResponse().getCode());
+        assertEquals("not found resource in database", thrown.getStatusResponse().getMessage());
+    }
+
+    @DisplayName("Test get exam by id with empty then throws 1699")
+    @Test
+    void testGetExamByIdWithArrayEmpty() throws Exception {
+        Long requestParam = 2L;
+        when(examRepository.findAllByExamId(requestParam)).thenReturn(null);
+        ExamServiceException thrown = assertThrows(ExamServiceException.class,
+                () -> examService.getExamById(requestParam),
+                "Expected getExamById(requestParam) to throw, but it did't");
+        assertEquals(1699,thrown.getStatusResponse().getCode());
+        assertEquals("not found resource in database", thrown.getStatusResponse().getMessage());
+    }
+
 }
