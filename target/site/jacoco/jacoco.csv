@@ -1,5 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-examservice,com.digitalacademy.examservice.interceptors,ExamServiceInterceptorAppConfig,0,9,0,0,0,3,0,2,0,2
-examservice,com.digitalacademy.examservice.interceptors,ExamServiceInterceptor,14,8,2,0,4,2,2,2,1,2
-examservice,com.digitalacademy.examservice.controllers,ExamController,249,171,3,3,68,37,3,7,0,7
-examservice,com.digitalacademy.examservice.services,ExamService,22,476,3,19,4,92,4,20,1,12
