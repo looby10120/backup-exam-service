@@ -120,25 +120,58 @@ public class ExamControllerTest {
 
         verify(examService, times(1)).getExamById(requestId);
     }
-
-
-   /* @DisplayName("Test get exam by id 1 should return question and answer")
+    @DisplayName("Test get exam by id 1 should return question and answer")
     @Test
-    void testGetExamByIdEmpty() throws Exception {
-        Long requestId = 100L;
-        when(examService.getExamById(requestId)).thenThrow(new ExamServiceException(StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE, HttpStatus.NOT_FOUND));
+    void testGetExamByIdWithSpace() throws Exception {
+        String requestId = " 1   ";
         MvcResult mvcResult = mvc.perform(get("/exam/" + requestId))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andReturn();
 
         JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
         JSONObject status = new JSONObject(resp.getString("status"));
 
-        assertEquals("1699", status.get("code").toString());
-        assertEquals("not found resource in database", status.get("message"));
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+
+    }
+
+    @DisplayName("Test get exam by id 1 should return question and answer")
+    @Test
+    void testGetExamByIdNumberFormatException() throws Exception {
+        Long requestId = 101L;
+        when(examService.getExamById(requestId)).thenThrow(new NumberFormatException());
+        MvcResult mvcResult = mvc.perform(get("/exam/" + requestId))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
 
         verify(examService, times(1)).getExamById(requestId);
-    }*/
+    }
+
+
+    @DisplayName("Test get exam by id 1 should return question and answer")
+    @Test
+    void testGetExamByIdInternalServerError() throws Exception {
+        Long requestId = 100L;
+        when(examService.getExamById(requestId)).thenThrow(new Exception());
+        MvcResult mvcResult = mvc.perform(get("/exam/" + requestId))
+                .andExpect(status().isInternalServerError())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("9900", status.get("code").toString());
+        assertEquals("death server", status.get("message"));
+
+        verify(examService, times(1)).getExamById(requestId);
+    }
 
     @DisplayName("Test get list top 5 history exam should return exam id and exam name")
     @Test
@@ -151,14 +184,14 @@ public class ExamControllerTest {
                 .andReturn();
 
         JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
-      //  log.info("resp : "+ resp);
+        //  log.info("resp : "+ resp);
         JSONObject status = new JSONObject(resp.getString("status"));
         JSONObject data = new JSONObject(resp.getString("data"));
         JSONArray history_most_do = new JSONArray(data.getString("history_most_do"));
 
         assertEquals("1000", status.get("code").toString());
         assertEquals("success", status.get("message"));
-       // log.info("history_most_do[{}] : "+ history_most_do.getJSONObject(0).get("exam_id"));
+        // log.info("history_most_do[{}] : "+ history_most_do.getJSONObject(0).get("exam_id"));
 
         assertEquals("1", history_most_do.getJSONObject(0).get("exam_id").toString());
         assertEquals("Test001", history_most_do.getJSONObject(0).get("exam_name").toString());
@@ -178,7 +211,7 @@ public class ExamControllerTest {
         Long requestId = 1L;
         when(examService.getUserLastDoExam(requestId)).thenReturn(examMockTest.getUserLastDoExamMock());
 
-        MvcResult mvcResult = mvc.perform(get("/exam//last_exam/"+ requestId))
+        MvcResult mvcResult = mvc.perform(get("/exam//last_exam/" + requestId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andReturn();
@@ -207,7 +240,7 @@ public class ExamControllerTest {
         Long requestId = 1L;
         when(examService.getHistoryUser(requestId)).thenReturn(examMockTest.getHistoryUser());
 
-        MvcResult mvcResult = mvc.perform(get("/exam/history/"+ requestId))
+        MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andReturn();
@@ -230,11 +263,9 @@ public class ExamControllerTest {
     }
 
 
-
-
     @Test
     @DisplayName("test createHistory return data success")
-    void createHistory() throws Exception{
+    void createHistory() throws Exception {
 
         HistoryExam historyExamRequest = examMockTest.sethistoryCreateMock();
 
