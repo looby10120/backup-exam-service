@@ -139,9 +139,7 @@ public class ExamControllerTest {
     @DisplayName("Test get exam by id 1 should return question and answer")
     @Test
     void testGetExamByIdNumberFormatException() throws Exception {
-        Long requestId = 101L;
-        when(examService.getExamById(requestId)).thenThrow(new NumberFormatException());
-        MvcResult mvcResult = mvc.perform(get("/exam/" + requestId))
+        MvcResult mvcResult = mvc.perform(get("/exam/" + "e"))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
@@ -151,7 +149,6 @@ public class ExamControllerTest {
         assertEquals("1499", status.get("code").toString());
         assertEquals("bad request", status.get("message"));
 
-        verify(examService, times(1)).getExamById(requestId);
     }
 
 
