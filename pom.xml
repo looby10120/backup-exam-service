@@ -158,6 +158,7 @@
                         <exclude>com/digitalacademy/examservice/constants/**</exclude>
                         <exclude>com/digitalacademy/examservice/exceptions/**</exclude>
                         <exclude>com/digitalacademy/examservice/repositories/**</exclude>
+                        <exclude>com/digitalacademy/examservice/interceptors/**</exclude>
                         <exclude>com/digitalacademy/examservice/models/**</exclude>
                         <exclude>com/digitalacademy/examservice/utils/**</exclude>
                         <exclude>com/digitalacademy/examservice/ExamServiceApplication*</exclude>
