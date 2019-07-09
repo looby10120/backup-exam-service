@@ -589,4 +589,5 @@ public class ExamControllerTest {
 
 //        verify(examService, times(1)).getExam();
     }
+
 }

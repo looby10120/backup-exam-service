@@ -372,4 +372,5 @@ public class ExamServiceTest {
         assertEquals("not found resource in database", thrown.getStatusResponse().getMessage());
     }
 
+    
 }
