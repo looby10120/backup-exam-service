@@ -372,5 +372,16 @@ public class ExamServiceTest {
         assertEquals("not found resource in database", thrown.getStatusResponse().getMessage());
     }
 
-    
+    @DisplayName("")
+    @Test
+    void testGetHistoryUserByIdWithArrayEmpty() throws Exception {
+        Long requestParam = 1L;
+        when(historyExamRepository.findAllByHistoryUserId(requestParam)).thenReturn(null);
+        ExamServiceException thrown = assertThrows(ExamServiceException.class,
+                () -> examService.getExamById(requestParam));
+        assertEquals(1699,thrown.getStatusResponse().getCode());
+        assertEquals("not found resource in database", thrown.getStatusResponse().getMessage());
+    }
+
+
 }

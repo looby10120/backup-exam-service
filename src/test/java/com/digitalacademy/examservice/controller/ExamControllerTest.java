@@ -466,25 +466,24 @@ public class ExamControllerTest {
 
     }
 
-//    @DisplayName("Test get exam by id 1 should return question and answer")
-//    @Test
-//    void testGetAllExamFailWithSpace() throws Exception {
-//        when(examService.getExam()).thenThrow(new ExamServiceException(StatusResponse.GET_BAD_REQUEST, HttpStatus.BAD_REQUEST));
-//
-//        doThrow(Exception.class).when(examService).createHistoryExam(historyExamRequest);
-//
-//        MvcResult mvcResult = mvc.perform(get("/exam/list"))
-//                .andExpect(status().isBadRequest())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-//                .andReturn();
-//
-//        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
-//        JSONObject status = new JSONObject(resp.getString("status"));
-//
-//        assertEquals("1499", status.get("code").toString());
-//        assertEquals("bad request", status.get("message"));
-//
-//    }
+    @DisplayName("Test get exam by id 1 should return question and answer")
+    @Test
+    void testGetAllExamFailWithSpace() throws Exception {
+        when(examService.getExam()).thenThrow(new ExamServiceException(StatusResponse.GET_BAD_REQUEST, HttpStatus.BAD_REQUEST));
+
+
+        MvcResult mvcResult = mvc.perform(get("/exam/list_exam"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+
+    }
 
     @DisplayName("")
     @Test
