@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.digitalacademy.examservice.services.ExamServiceTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 20.422 s - in com.digitalacademy.examservice.services.ExamServiceTest
+=======
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.41 s - in com.digitalacademy.examservice.services.ExamServiceTest
+>>>>>>> 538ee1188ada7b94bc3f5edd78234e702a7bfd18

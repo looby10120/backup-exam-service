@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.digitalacademy.examservice.controller.ExamControllerTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.838 s - in com.digitalacademy.examservice.controller.ExamControllerTest
+=======
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.052 s - in com.digitalacademy.examservice.controller.ExamControllerTest
+>>>>>>> 538ee1188ada7b94bc3f5edd78234e702a7bfd18
