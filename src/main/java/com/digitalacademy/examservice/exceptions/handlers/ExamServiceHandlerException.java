@@ -35,11 +35,11 @@ public class ExamServiceHandlerException {
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public HttpEntity<ResponseModel> handlersHttpRequestMethodNotSupportedException() {
-        StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
+        StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
 
         return new ResponseModel(
                 new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-        ).build(HttpStatus.BAD_REQUEST);
+        ).build(HttpStatus.NOT_FOUND);
     }
 
 

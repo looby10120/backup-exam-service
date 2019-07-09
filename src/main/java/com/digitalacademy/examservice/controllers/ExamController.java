@@ -45,11 +45,11 @@ public class ExamController {
 
             return ResponseEntity.ok(new ResponseModel(status, getExamResponse));
         } catch (NumberFormatException e) {
-            StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
+            StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
 
             return new ResponseModel(
                     new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-            ).build(HttpStatus.BAD_REQUEST);
+            ).build(HttpStatus.NOT_FOUND);
         } catch (ExamServiceException e) {
             StatusResponse statusResponse = e.getStatusResponse();
 
@@ -96,12 +96,6 @@ public class ExamController {
                     StatusResponse.GET_RESPONSE_SUCCESS.getCode(), StatusResponse.GET_RESPONSE_SUCCESS.getMessage()
             );
             return ResponseEntity.ok(new ResponseModel(status, historyExam));
-        } catch (ExamServiceException e) {
-            StatusResponse statusResponse = e.getStatusResponse();
-
-            return ResponseEntity.status(e.getHttpStatus()).body(new ResponseModel(
-                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-            ));
         } catch (Exception e) {
             StatusResponse statusResponse = StatusResponse.GET_DEATH_SERVER;
 

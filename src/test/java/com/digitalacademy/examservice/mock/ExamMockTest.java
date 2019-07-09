@@ -297,7 +297,7 @@ public class ExamMockTest {
         topFire.setCountAllDo(4L);
         historyArrayList.add(topFire);
 
-        GetHistoryTopFire topFires= new GetHistoryTopFire();
+        GetHistoryTopFire topFires = new GetHistoryTopFire();
         topFires.setExamId(2L);
         topFires.setExamName("Test002");
         topFires.setCountAllDo(2L);
@@ -317,7 +317,7 @@ public class ExamMockTest {
         topFire.setCountAllDo(4L);
         historyArrayList.add(topFire);
 
-        GetHistoryTopFire topFires= new GetHistoryTopFire();
+        GetHistoryTopFire topFires = new GetHistoryTopFire();
         topFires.setExamId(2L);
         topFires.setExamName("Test002");
         topFires.setCountAllDo(2L);
@@ -327,7 +327,7 @@ public class ExamMockTest {
         return getHistoryExamMostResponse;
     }
 
-    public static ArrayList<HistoryExam> getHistoryExamArrayListMock(){
+    public static ArrayList<HistoryExam> getHistoryExamArrayListMock() {
         ArrayList<HistoryExam> historyExamArrayList = new ArrayList<>();
 
         Date date = new Date();
@@ -344,10 +344,10 @@ public class ExamMockTest {
         historyExam2.setHistoryLastUpdate(date);
         historyExamArrayList.add(historyExam2);
 
-        return  historyExamArrayList;
+        return historyExamArrayList;
     }
 
-    public static ArrayList<HistoryExam> getHistoryExamArrayListMockWith5Element(){
+    public static ArrayList<HistoryExam> getHistoryExamArrayListMockWith5Element() {
         ArrayList<HistoryExam> historyExamArrayList = new ArrayList<>();
 
         Date date = new Date();
@@ -382,10 +382,10 @@ public class ExamMockTest {
         historyExam5.setHistoryLastUpdate(date);
         historyExamArrayList.add(historyExam5);
 
-        return  historyExamArrayList;
+        return historyExamArrayList;
     }
 
-    public static GetUserLastDoExam getUserLastDoExamMock(){
+    public static GetUserLastDoExam getUserLastDoExamMock() {
         GetUserLastDoExam getUserLastDoExam = new GetUserLastDoExam();
         ArrayList<GetUserLastDoExamContent> getUserLastDoExamContentArrayList = new ArrayList<>();
 
@@ -438,7 +438,7 @@ public class ExamMockTest {
     }
 
 
-    public static HistoryExam sethistoryCreateMock(){
+    public static HistoryExam sethistoryCreateMock() {
 
         HistoryExam historyExam = new HistoryExam();
         historyExam.setHistoryId(1L);
@@ -450,7 +450,7 @@ public class ExamMockTest {
         return historyExam;
     }
 
-    public static HistoryExam gethistoryCreateMock(){
+    public static HistoryExam gethistoryCreateMock() {
 
         HistoryExam historyExam = new HistoryExam();
         historyExam.setHistoryId(1L);
@@ -461,4 +461,13 @@ public class ExamMockTest {
 
         return historyExam;
     }
+
+    public static HistoryExam gethistoryCreateBodyFailMock() {
+
+        HistoryExam historyExam = new HistoryExam();
+        historyExam.setHistoryId(1L);
+        historyExam.setHistoryExamId(1L);
+        return historyExam;
+    }
+
 }
