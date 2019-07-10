@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface HistoryExamRepository extends JpaRepository<HistoryExam, Long> {
     Long countByHistoryExamId(Long id);
-    ArrayList<HistoryExam> findAllByHistoryUserId(Long id);
+    ArrayList<HistoryExam> findAllByHistoryEmployeeId(String id);
 }

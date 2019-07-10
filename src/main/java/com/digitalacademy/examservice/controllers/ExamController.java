@@ -115,8 +115,8 @@ public class ExamController {
             ).build(HttpStatus.BAD_REQUEST);
         }
         try {
-            Long longId = Long.valueOf(id);
-            GetUserLastDoExam getUserLastDoExam = examService.getUserLastDoExam(longId);
+
+            GetUserLastDoExam getUserLastDoExam = examService.getUserLastDoExam(id);
             StatusModel status = new StatusModel(
                     StatusResponse.GET_RESPONSE_SUCCESS.getCode(), StatusResponse.GET_RESPONSE_SUCCESS.getMessage()
             );
@@ -151,8 +151,8 @@ public class ExamController {
             ).build(HttpStatus.BAD_REQUEST);
         }
         try {
-            Long longId = Long.valueOf(id);
-            GetHistoryUser historyExam = examService.getHistoryUser(longId);
+
+            GetHistoryUser historyExam = examService.getHistoryUser(id);
             StatusModel status = new StatusModel(
                     StatusResponse.GET_RESPONSE_SUCCESS.getCode(), StatusResponse.GET_RESPONSE_SUCCESS.getMessage()
             );

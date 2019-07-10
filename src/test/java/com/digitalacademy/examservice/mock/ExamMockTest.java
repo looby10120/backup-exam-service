@@ -333,13 +333,13 @@ public class ExamMockTest {
         Date date = new Date();
 
         HistoryExam historyExam = new HistoryExam();
-        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryEmployeeId("1");
         historyExam.setHistoryExamId(1L);
         historyExam.setHistoryLastUpdate(date);
         historyExamArrayList.add(historyExam);
 
         HistoryExam historyExam2 = new HistoryExam();
-        historyExam2.setHistoryUserId(1L);
+        historyExam2.setHistoryEmployeeId("1");
         historyExam2.setHistoryExamId(2L);
         historyExam2.setHistoryLastUpdate(date);
         historyExamArrayList.add(historyExam2);
@@ -353,31 +353,31 @@ public class ExamMockTest {
         Date date = new Date();
 
         HistoryExam historyExam = new HistoryExam();
-        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryEmployeeId("1");
         historyExam.setHistoryExamId(1L);
         historyExam.setHistoryLastUpdate(date);
         historyExamArrayList.add(historyExam);
 
         HistoryExam historyExam2 = new HistoryExam();
-        historyExam2.setHistoryUserId(1L);
+        historyExam2.setHistoryEmployeeId("1");
         historyExam2.setHistoryExamId(2L);
         historyExam2.setHistoryLastUpdate(date);
         historyExamArrayList.add(historyExam2);
 
         HistoryExam historyExam3 = new HistoryExam();
-        historyExam3.setHistoryUserId(1L);
+        historyExam3.setHistoryEmployeeId("1");
         historyExam3.setHistoryExamId(3L);
         historyExam3.setHistoryLastUpdate(date);
         historyExamArrayList.add(historyExam3);
 
         HistoryExam historyExam4 = new HistoryExam();
-        historyExam4.setHistoryUserId(1L);
+        historyExam4.setHistoryEmployeeId("1");
         historyExam4.setHistoryExamId(4L);
         historyExam4.setHistoryLastUpdate(date);
         historyExamArrayList.add(historyExam4);
 
         HistoryExam historyExam5 = new HistoryExam();
-        historyExam5.setHistoryUserId(1L);
+        historyExam5.setHistoryEmployeeId("1");
         historyExam5.setHistoryExamId(5L);
         historyExam5.setHistoryLastUpdate(date);
         historyExamArrayList.add(historyExam5);
@@ -443,7 +443,7 @@ public class ExamMockTest {
         HistoryExam historyExam = new HistoryExam();
         historyExam.setHistoryId(1L);
         historyExam.setHistoryExamId(1L);
-        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryEmployeeId("1");
         historyExam.setHistoryScore(10);
         historyExam.setHistoryTime(30);
 
@@ -455,7 +455,7 @@ public class ExamMockTest {
         HistoryExam historyExam = new HistoryExam();
         historyExam.setHistoryId(1L);
         historyExam.setHistoryExamId(1L);
-        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryEmployeeId("1");
         historyExam.setHistoryScore(10);
         historyExam.setHistoryTime(30);
 

@@ -249,7 +249,7 @@ public class ExamControllerTest {
     @DisplayName("Test get list top 5 history exam should return exam id and exam name")
     @Test
     void testGetUserLastDoExam() throws Exception {
-        Long requestId = 1L;
+        String requestId = "1";
         when(examService.getUserLastDoExam(requestId)).thenReturn(examMockTest.getUserLastDoExamMock());
 
         MvcResult mvcResult = mvc.perform(get("/exam//last_exam/" + requestId))
@@ -278,7 +278,7 @@ public class ExamControllerTest {
     @DisplayName("Test get list top 5 history exam should return exam id and exam name")
     @Test
     void testGetHistoryUser() throws Exception {
-        Long requestId = 1L;
+        String requestId = "1";
         when(examService.getHistoryUser(requestId)).thenReturn(examMockTest.getHistoryUser());
 
         MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
@@ -348,7 +348,7 @@ public class ExamControllerTest {
     @DisplayName("Test get exam by id 1 should return question and answer")
     @Test
     void testGetUserLastDoExamInternalServerError() throws Exception {
-        Long requestId = 100L;
+        String requestId = "100";
         when(examService.getUserLastDoExam(requestId)).thenThrow(new Exception());
         MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + requestId))
                 .andExpect(status().isInternalServerError())
@@ -380,7 +380,7 @@ public class ExamControllerTest {
     @DisplayName("Test get exam by id 1 should return question and answer")
     @Test
     void testGetUserLastDoExamFail() throws Exception {
-        Long requestId = 101L;
+        String requestId = "101";
         when(examService.getUserLastDoExam(requestId)).thenThrow(new ExamServiceException(StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE, HttpStatus.NOT_FOUND));
         MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + requestId))
                 .andExpect(status().isNotFound())
@@ -508,7 +508,7 @@ public class ExamControllerTest {
     @DisplayName("")
     @Test
     void testGetHistoryUserFailDeathServer() throws Exception {
-        Long requestId = 1L;
+        String requestId = "1";
         when(examService.getHistoryUser(requestId)).thenThrow(new Exception());
 
         MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
@@ -571,7 +571,7 @@ public class ExamControllerTest {
     @DisplayName("")
     @Test
     void testGetHistoryUserFail() throws Exception {
-        Long requestId = 100L;
+        String requestId = "100";
         when(examService.getHistoryUser(requestId)).thenThrow(new ExamServiceException(StatusResponse.GET_BAD_REQUEST, HttpStatus.BAD_REQUEST));
 
         MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
