@@ -6,6 +6,8 @@ import com.digitalacademy.examservice.models.ResponseModel;
 import com.digitalacademy.examservice.models.StatusModel;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -34,7 +36,7 @@ public class ExamServiceHandlerException {
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public HttpEntity<ResponseModel> handlersHttpRequestMethodNotSupportedException() {
+    public HttpEntity<ResponseModel> handleHttpRequestMethodNotSupportedException() {
         StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
 
         return new ResponseModel(
@@ -42,5 +44,22 @@ public class ExamServiceHandlerException {
         ).build(HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public HttpEntity<ResponseModel> handleHttpMessageNotReadableException() {
+        StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
+
+        return new ResponseModel(
+                new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
+        ).build(HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public HttpEntity<ResponseModel> handleHttpMediaTypeNotSupportedException() {
+        StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
+
+        return new ResponseModel(
+                new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
+        ).build(HttpStatus.BAD_REQUEST);
+    }
 
 }
