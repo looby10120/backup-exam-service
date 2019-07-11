@@ -7,6 +7,7 @@ import com.digitalacademy.examservice.models.response.*;
 import com.digitalacademy.examservice.models.ResponseModel;
 import com.digitalacademy.examservice.models.StatusModel;
 import com.digitalacademy.examservice.services.ExamService;
+import com.sun.javafx.binding.StringFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -32,10 +33,10 @@ public class ExamController {
     @GetMapping("/{id}")
     public HttpEntity<ResponseModel> getExamById(@PathVariable String id){
         if (id.trim().length() != id.length()) {
-            StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
+            StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
             return new ResponseModel(
                     new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-            ).build(HttpStatus.BAD_REQUEST);
+            ).build(HttpStatus.NOT_FOUND);
         }
         try {
             Long longId = Long.valueOf(id);
@@ -109,10 +110,10 @@ public class ExamController {
     @GetMapping("/last_exam/{id}")
     public HttpEntity<ResponseModel> getUserLastDoExam(@PathVariable String id) {
         if (id.trim().length() != id.length()) {
-            StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
+            StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
             return new ResponseModel(
                     new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-            ).build(HttpStatus.BAD_REQUEST);
+            ).build(HttpStatus.NOT_FOUND);
         }
         try {
 
@@ -145,10 +146,10 @@ public class ExamController {
     @GetMapping("/history/{id}")
     public HttpEntity<ResponseModel> getHistoryUserDoExam(@PathVariable String id) {
         if (id.trim().length() != id.length()) {
-            StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
+            StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
             return new ResponseModel(
                     new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-            ).build(HttpStatus.BAD_REQUEST);
+            ).build(HttpStatus.NOT_FOUND);
         }
         try {
 
@@ -201,7 +202,6 @@ public class ExamController {
                     new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
             ).build(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
 
     }
 
