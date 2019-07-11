@@ -142,10 +142,10 @@ public class ExamService {
         return choiceRepository.findAllByChoiceQuestionId(choice_que_id);
     }
 
-    public GetUserLastDoExam getUserLastDoExam(String id) throws Exception {
+    public GetUserLastDoExam getUserLastDoExam(Long id) throws Exception {
         GetUserLastDoExam getUserLastDoExam = new GetUserLastDoExam();
 
-        ArrayList<HistoryExam> historyExamArrayList = historyExamRepository.findAllByHistoryEmployeeId(id);
+        ArrayList<HistoryExam> historyExamArrayList = historyExamRepository.findAllByHistoryUserId(id);
         // if find exam by id but not found ,it will return null and throw 404 not found
         if (historyExamArrayList.isEmpty()) {
             throw new ExamServiceException(
@@ -181,8 +181,8 @@ public class ExamService {
         return getUserLastDoExam;
     }
 
-    public GetHistoryUser getHistoryUser(String id) throws Exception {
-        List<HistoryExam> historyList = historyExamRepository.findAllByHistoryEmployeeId(id);
+    public GetHistoryUser getHistoryUser(Long id) throws Exception {
+        List<HistoryExam> historyList = historyExamRepository.findAllByHistoryUserId(id);
         if (historyList.isEmpty()) {
             throw new ExamServiceException(
                     StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE,

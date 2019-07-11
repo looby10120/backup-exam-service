@@ -21,7 +21,7 @@ public class HistoryExam {
     private Long historyExamId;
 
     @NotNull
-    private String historyEmployeeId;
+    private Long historyUserId;
 
     @NotNull
     @Min(value = 1, message = "please score your History exam")

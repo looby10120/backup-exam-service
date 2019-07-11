@@ -275,10 +275,10 @@ public class ExamServiceTest {
     @DisplayName("Test get user last do exam must be return GetUserLastDoExam json")
     @Test
     void testGetUserLastDoExam() throws Exception {
-        String requestParam = "1";
+        Long requestParam = 1L;
         when(examRepository.findAll()).thenReturn(examMockTest.getListExamAllService5Element());
 
-        when(historyExamRepository.findAllByHistoryEmployeeId(requestParam)).thenReturn(examMockTest.getHistoryExamArrayListMock());
+        when(historyExamRepository.findAllByHistoryUserId(requestParam)).thenReturn(examMockTest.getHistoryExamArrayListMock());
 
         when(examRepository.findAllByExamId(1L)).thenReturn(examMockTest.getListExamAllService5Element().get(0));
         when(examRepository.findAllByExamId(2L)).thenReturn(examMockTest.getListExamAllService5Element().get(1));
@@ -295,10 +295,10 @@ public class ExamServiceTest {
     @DisplayName("Test get user last do exam must be with 5 element return GetUserLastDoExam json")
     @Test
     void testGetUserLastDoExamWith5Element() throws Exception {
-        String requestParam = "1";
+        Long requestParam = 1L;
         when(examRepository.findAll()).thenReturn(examMockTest.getListExamAllService5Element());
 
-        when(historyExamRepository.findAllByHistoryEmployeeId(requestParam)).thenReturn(examMockTest.getHistoryExamArrayListMockWith5Element());
+        when(historyExamRepository.findAllByHistoryUserId(requestParam)).thenReturn(examMockTest.getHistoryExamArrayListMockWith5Element());
 
         when(examRepository.findAllByExamId(1L)).thenReturn(examMockTest.getListExamAllService5Element().get(0));
         when(examRepository.findAllByExamId(2L)).thenReturn(examMockTest.getListExamAllService5Element().get(1));
@@ -321,9 +321,9 @@ public class ExamServiceTest {
     @DisplayName("Test get all exam user do return list all exam history")
     @Test
     void testgetHistoryUserDoExam() throws Exception {
-        String requestParam = "1";
+        Long requestParam = 1L;
         Long examId = 1L;
-        when(historyExamRepository.findAllByHistoryEmployeeId(requestParam)).thenReturn(examMockTest.historyExam());
+        when(historyExamRepository.findAllByHistoryUserId(requestParam)).thenReturn(examMockTest.historyExam());
         when(examRepository.findAllByExamId(examId)).thenReturn(examMockTest.getAllExamMock());
 
         GetHistoryUser resp = this.examService.getHistoryUser(requestParam);
@@ -343,7 +343,7 @@ public class ExamServiceTest {
 
         assertEquals("1", resp.getHistoryId().toString());
         assertEquals("1", resp.getHistoryExamId().toString());
-        assertEquals("1", resp.getHistoryEmployeeId());
+        assertEquals("1", resp.getHistoryUserId().toString());
         assertEquals("10", resp.getHistoryScore().toString());
         assertEquals("30", resp.getHistoryTime().toString());
     }
@@ -352,8 +352,8 @@ public class ExamServiceTest {
     @DisplayName("Test last do exam with array empty then throws 1699")
     @Test
     void testGetUserLastDoExamWithArrayEmpty() throws Exception {
-        String requestParam = "2";
-        when(historyExamRepository.findAllByHistoryEmployeeId(requestParam)).thenReturn(examMockTest.historyExamEmpty());
+        Long requestParam = 2L;
+        when(historyExamRepository.findAllByHistoryUserId(requestParam)).thenReturn(examMockTest.historyExamEmpty());
         ExamServiceException thrown = assertThrows(ExamServiceException.class,
                 () -> examService.getUserLastDoExam(requestParam),
                 "Expected getUserLastDoExam(requestParam) to throw, but it did't");
@@ -376,9 +376,9 @@ public class ExamServiceTest {
     @DisplayName("")
     @Test
     void testGetHistoryUserByIdWithArrayEmpty() throws Exception {
-        String requestParam = "1";
+       Long requestParam = 1L;
         Long examId = 1L;
-        when(historyExamRepository.findAllByHistoryEmployeeId(requestParam)).thenReturn(null);
+        when(historyExamRepository.findAllByHistoryUserId(requestParam)).thenReturn(null);
         ExamServiceException thrown = assertThrows(ExamServiceException.class,
                 () -> examService.getExamById(examId));
         assertEquals(1699,thrown.getStatusResponse().getCode());
@@ -388,8 +388,8 @@ public class ExamServiceTest {
     @DisplayName("")
     @Test
     void testGetHistoryUserIsEmpty() throws Exception {
-        String requestParam = "100";
-        when(historyExamRepository.findAllByHistoryEmployeeId(requestParam)).thenReturn(examMockTest.historyExamEmpty());
+        Long requestParam = 100L;
+        when(historyExamRepository.findAllByHistoryUserId(requestParam)).thenReturn(examMockTest.historyExamEmpty());
         ExamServiceException examServiceException = assertThrows(ExamServiceException.class,
                 () -> examService.getHistoryUser(requestParam));
 

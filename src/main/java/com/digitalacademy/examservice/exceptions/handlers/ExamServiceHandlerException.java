@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -17,14 +18,14 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @RestControllerAdvice
 public class ExamServiceHandlerException {
 
-//    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-//    public HttpEntity<ResponseModel> handlersBadRequestException() {
-//        StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
-//
-//        return new ResponseModel(
-//                new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-//        ).build(HttpStatus.BAD_REQUEST);
-//    }
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public HttpEntity<ResponseModel> handlersMethodArgumentTypeMismatchException() {
+        StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
+
+        return new ResponseModel(
+                new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
+        ).build(HttpStatus.BAD_REQUEST);
+    }
 
 
     @ExceptionHandler(value = {ExamServiceException.class})
@@ -61,5 +62,16 @@ public class ExamServiceHandlerException {
                 new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
         ).build(HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    public HttpEntity<ResponseModel> handleMissingRequestHeaderException() {
+        StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
+
+        return new ResponseModel(
+                new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
+        ).build(HttpStatus.BAD_REQUEST);
+    }
+
+
 
 }

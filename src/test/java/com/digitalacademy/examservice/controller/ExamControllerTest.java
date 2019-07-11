@@ -35,7 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ExamControllerTest {
     private static final Logger log = LogManager.getLogger(ExamService.class.getName());
-    private ExamMockTest examMockTest;
 
     @Mock
     ExamService examService;
@@ -57,7 +56,7 @@ public class ExamControllerTest {
     @DisplayName("Test get list all exam should return exam id and exam name")
     @Test
     void testGetAllExam() throws Exception {
-        when(examService.getExam()).thenReturn(examMockTest.getListExamAllController());
+        when(examService.getExam()).thenReturn(ExamMockTest.getListExamAllController());
 
         MvcResult mvcResult = mvc.perform(get("/exam/list_exam"))
                 .andExpect(status().isOk())
@@ -85,7 +84,7 @@ public class ExamControllerTest {
     @Test
     void testGetExamByIdSuccess() throws Exception {
         Long requestId = 1L;
-        when(examService.getExamById(requestId)).thenReturn(examMockTest.getExamResponseMock());
+        when(examService.getExamById(requestId)).thenReturn(ExamMockTest.getExamResponseMock());
         MvcResult mvcResult = mvc.perform(get("/exam/" + requestId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -128,15 +127,16 @@ public class ExamControllerTest {
     @Test
     void testGetExamByIdWithSpace() throws Exception {
         String requestId = " 1   ";
+
         MvcResult mvcResult = mvc.perform(get("/exam/" + requestId))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isNotFound())
                 .andReturn();
 
         JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
         JSONObject status = new JSONObject(resp.getString("status"));
 
-        assertEquals("1499", status.get("code").toString());
-        assertEquals("bad request", status.get("message"));
+        assertEquals("1999", status.get("code").toString());
+        assertEquals("request wrong URL path", status.get("message"));
 
     }
 
@@ -177,7 +177,7 @@ public class ExamControllerTest {
     @DisplayName("Test get list top 5 history exam should return exam id and exam name")
     @Test
     void testGetTop5HistoryExam() throws Exception {
-        when(examService.getHistoryExamMost()).thenReturn(examMockTest.getHistoryExamTop5Mock());
+        when(examService.getHistoryExamMost()).thenReturn(ExamMockTest.getHistoryExamTop5Mock());
 
         MvcResult mvcResult = mvc.perform(get("/exam/exam_most"))
                 .andExpect(status().isOk())
@@ -211,7 +211,7 @@ public class ExamControllerTest {
     @Test
     void testGetTop5HistoryExamServiceException() throws Exception {
 
-        when(examService.getHistoryExamMost()).thenReturn(examMockTest.getHistoryExamTop5Mock());
+        when(examService.getHistoryExamMost()).thenReturn(ExamMockTest.getHistoryExamTop5Mock());
 
         MvcResult mvcResult = mvc.perform(get("/exam/exam_most" + "er"))
                 .andExpect(status().isNotFound())
@@ -249,10 +249,10 @@ public class ExamControllerTest {
     @DisplayName("Test get list top 5 history exam should return exam id and exam name")
     @Test
     void testGetUserLastDoExam() throws Exception {
-        String requestId = "1";
-        when(examService.getUserLastDoExam(requestId)).thenReturn(examMockTest.getUserLastDoExamMock());
+        Long requestId = 1L;
+        when(examService.getUserLastDoExam(requestId)).thenReturn(ExamMockTest.getUserLastDoExamMock());
 
-        MvcResult mvcResult = mvc.perform(get("/exam//last_exam/" + requestId))
+        MvcResult mvcResult = mvc.perform(get("/exam//last_exam").header("id", requestId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andReturn();
@@ -278,10 +278,10 @@ public class ExamControllerTest {
     @DisplayName("Test get list top 5 history exam should return exam id and exam name")
     @Test
     void testGetHistoryUser() throws Exception {
-        String requestId = "1";
-        when(examService.getHistoryUser(requestId)).thenReturn(examMockTest.getHistoryUser());
+        Long requestId = 1L;
+        when(examService.getHistoryUser(requestId)).thenReturn(ExamMockTest.getHistoryUser());
 
-        MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
+        MvcResult mvcResult = mvc.perform(get("/exam/history").header("id", requestId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andReturn();
@@ -308,16 +308,18 @@ public class ExamControllerTest {
     @DisplayName("test createHistory return data success")
     void createHistory() throws Exception {
 
-        HistoryExam historyExamRequest = examMockTest.sethistoryCreateMock();
-
+        HistoryExam historyExamRequest = ExamMockTest.sethistoryCreateMock();
+        log.info(historyExamRequest);
+        Long userId = 1L;
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(historyExamRequest);
 
-        when(examService.createHistoryExam(historyExamRequest)).thenReturn(examMockTest.gethistoryCreateMock());
-
+        when(examService.createHistoryExam(historyExamRequest)).thenReturn(ExamMockTest.gethistoryCreateMock());
+        log.info("2: "+historyExamRequest);
         MvcResult mvcResult = mvc.perform(post("/exam/create_history")
+                .header("id", userId)
                 .contentType(MediaType.APPLICATION_JSON).content(requestJson))
                 .andExpect(status().isCreated())
                 .andReturn();
@@ -333,7 +335,8 @@ public class ExamControllerTest {
     @DisplayName("Test get list top 5 history exam should return exam id and exam name")
     @Test
     void testGetUserLastDoExamWithSpace() throws Exception {
-        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + "  1  "))
+        String userId = "'  1  '";
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam").header("id", userId))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
@@ -348,9 +351,9 @@ public class ExamControllerTest {
     @DisplayName("Test get exam by id 1 should return question and answer")
     @Test
     void testGetUserLastDoExamInternalServerError() throws Exception {
-        String requestId = "100";
+        Long requestId = 100L;
         when(examService.getUserLastDoExam(requestId)).thenThrow(new Exception());
-        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + requestId))
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam").header("id", requestId))
                 .andExpect(status().isInternalServerError())
                 .andReturn();
 
@@ -366,7 +369,7 @@ public class ExamControllerTest {
     @DisplayName("Test get exam by id 1 should return question and answer")
     @Test
     void testGetUserLastDoExamNumberFormatException() throws Exception {
-        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + "e"))
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam").header("id", "e"))
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
@@ -380,9 +383,9 @@ public class ExamControllerTest {
     @DisplayName("Test get exam by id 1 should return question and answer")
     @Test
     void testGetUserLastDoExamFail() throws Exception {
-        String requestId = "101";
+        Long requestId = 101L;
         when(examService.getUserLastDoExam(requestId)).thenThrow(new ExamServiceException(StatusResponse.GET_NOT_FOUND_RESOURCE_IN_DATABASE, HttpStatus.NOT_FOUND));
-        MvcResult mvcResult = mvc.perform(get("/exam/last_exam/" + requestId))
+        MvcResult mvcResult = mvc.perform(get("/exam/last_exam").header("id", requestId))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andReturn();
@@ -401,8 +404,8 @@ public class ExamControllerTest {
     @Test
     void testCreateHistoryInternalServerError() throws Exception {
 
-        HistoryExam historyExamRequest = examMockTest.sethistoryCreateMock();
-
+        HistoryExam historyExamRequest = ExamMockTest.sethistoryCreateMock();
+        Long userId = 1L;
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
@@ -411,6 +414,7 @@ public class ExamControllerTest {
         doThrow(Exception.class).when(examService).createHistoryExam(historyExamRequest);
 
         MvcResult mvcResult = mvc.perform(post("/exam/create_history")
+                .header("id", userId)
                 .contentType(MediaType.APPLICATION_JSON).content(requestJson))
                 .andExpect(status().isInternalServerError())
                 .andReturn();
@@ -424,12 +428,12 @@ public class ExamControllerTest {
         verify(examService, times(1)).createHistoryExam(historyExamRequest);
     }
 
-    @DisplayName("Test testCreateHistoryBadRequest")
+    @DisplayName("Test testCreateHistoryHeaderBadRequest")
     @Test
-    void testCreateHistoryBadRequest() throws Exception {
+    void testCreateHistoryHeaderBadRequest() throws Exception {
 
-        HistoryExam historyExamRequest = examMockTest.gethistoryCreateBodyFailMock();
-
+        HistoryExam historyExamRequest = ExamMockTest.gethistoryCreateBodyFailMock();
+        Long userId = 1L;
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
@@ -437,6 +441,32 @@ public class ExamControllerTest {
 
 
         MvcResult mvcResult = mvc.perform(post("/exam/create_history")
+                .header("user-id", userId)
+                .contentType(MediaType.APPLICATION_JSON).content(requestJson))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+    }
+
+    @DisplayName("Test testCreateHistoryBodyBadRequest")
+    @Test
+    void testCreateHistoryBodyBadRequest() throws Exception {
+
+        HistoryExam historyExamRequest = ExamMockTest.gethistoryCreateBodyFailMock();
+        Long userId = 1L;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson = ow.writeValueAsString(historyExamRequest);
+
+
+        MvcResult mvcResult = mvc.perform(post("/exam/create_history")
+                .header("id", userId)
                 .contentType(MediaType.APPLICATION_JSON).content(requestJson))
                 .andExpect(status().isBadRequest())
                 .andReturn();
@@ -508,10 +538,10 @@ public class ExamControllerTest {
     @DisplayName("")
     @Test
     void testGetHistoryUserFailDeathServer() throws Exception {
-        String requestId = "1";
+        Long requestId = 1L;
         when(examService.getHistoryUser(requestId)).thenThrow(new Exception());
 
-        MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
+        MvcResult mvcResult = mvc.perform(get("/exam/history").header("id", requestId))
                 .andExpect(status().isInternalServerError())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andReturn();
@@ -529,10 +559,10 @@ public class ExamControllerTest {
     @DisplayName("")
     @Test
     void testGetHistoryUserFailPathSpace() throws Exception {
-        String requestId = "1  ";
+        String requestId = " ' 1  '";
 //        when(examService.getHistoryUser(requestId)).thenThrow(new Exception());
 
-        MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
+        MvcResult mvcResult = mvc.perform(get("/exam/history").header("id", requestId))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andReturn();
@@ -550,10 +580,9 @@ public class ExamControllerTest {
     @DisplayName("")
     @Test
     void testGetHistoryUserFailNumberFormat() throws Exception {
-//        Long requestId = 1L;
-//        when(examService.getHistoryUser(requestId)).thenThrow(new Exception());
+        String userId = "1e";
 
-        MvcResult mvcResult = mvc.perform(get("/exam/history/1e"))
+        MvcResult mvcResult = mvc.perform(get("/exam/history").header("id", userId))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andReturn();
@@ -571,10 +600,10 @@ public class ExamControllerTest {
     @DisplayName("")
     @Test
     void testGetHistoryUserFail() throws Exception {
-        String requestId = "100";
+        Long requestId = 100L;
         when(examService.getHistoryUser(requestId)).thenThrow(new ExamServiceException(StatusResponse.GET_BAD_REQUEST, HttpStatus.BAD_REQUEST));
 
-        MvcResult mvcResult = mvc.perform(get("/exam/history/" + requestId))
+        MvcResult mvcResult = mvc.perform(get("/exam/history").header("id",requestId))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andReturn();
