@@ -77,7 +77,7 @@ public class ExamServiceTest {
 
     }
 
-    @DisplayName("Test get question should return list")
+  /*  @DisplayName("Test get question should return list")
     @Test
     void testGetAllQuestion2() {
         when(questionRepository.findAll()).thenReturn(examMockTest.getQuestionMock());
@@ -99,9 +99,9 @@ public class ExamServiceTest {
         assertEquals("single", resp.get(1).getQuestionType());
         assertNull(resp.get(1).getQuestionLastUpdate());
         assertEquals("1", resp.get(1).getQuestionUserCreate().toString());
-    }
+    }*/
 
-    @DisplayName("Test get question By Id should return list")
+/*    @DisplayName("Test get question By Id should return list")
     @Test
     void testGetQuestionById2() {
         Long requestParam = 1L;
@@ -116,9 +116,9 @@ public class ExamServiceTest {
         assertEquals("single", resp.get(0).getQuestionType());
         assertNull(resp.get(0).getQuestionLastUpdate());
         assertEquals("1", resp.get(0).getQuestionUserCreate().toString());
-    }
+    }*/
 
-    @DisplayName("Test get choice should return list")
+/*    @DisplayName("Test get choice should return list")
     @Test
     void testGetAllQuestion() {
         when(choiceRepository.findAll()).thenReturn(examMockTest.getChoiceMock());
@@ -160,9 +160,9 @@ public class ExamServiceTest {
         assertEquals("0", resp.get(3).getChoiceScore().toString());
         assertNull(resp.get(3).getChoiceLastUpdate());
         assertEquals("1", resp.get(3).getChoiceUserCreate().toString());
-    }
+    }*/
 
-    @DisplayName("Test get question By Id should return list")
+  /*  @DisplayName("Test get question By Id should return list")
     @Test
     void testGetQuestionById() {
         Long choice_que_id = 1L;
@@ -179,7 +179,7 @@ public class ExamServiceTest {
         assertNull(resp.get(0).getChoiceLastUpdate());
         assertEquals("1", resp.get(0).getChoiceUserCreate().toString());
 
-    }
+    }*/
 
     @DisplayName("Test get question By Id should return list")
     @Test

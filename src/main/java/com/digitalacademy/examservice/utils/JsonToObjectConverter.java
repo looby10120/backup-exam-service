@@ -10,10 +10,14 @@ public class JsonToObjectConverter {
     // which also explains why `GetLoanInfoResponse` in `customerservice` has exactly the same attributes as-
     // `LoanStatusResponse` in `loanservice`.
     // Further references are provided in `customerservice` and `loanservice` project.
+
+    private JsonToObjectConverter() {
+    }
+
     /**
      * Mapping data pattern from snake_case (JSON format) into Java model object.
      */
-    private static ObjectMapper objectMapper =
+    public static ObjectMapper objectMapper =
             new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
 
     /**

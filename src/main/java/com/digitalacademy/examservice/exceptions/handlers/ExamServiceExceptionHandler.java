@@ -11,22 +11,11 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @RestControllerAdvice
-public class ExamServiceHandlerException {
-
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public HttpEntity<ResponseModel> handlersMethodArgumentTypeMismatchException() {
-        StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
-
-        return new ResponseModel(
-                new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-        ).build(HttpStatus.BAD_REQUEST);
-    }
-
+public class ExamServiceExceptionHandler {
 
     @ExceptionHandler(value = {ExamServiceException.class})
     public HttpEntity<ResponseModel> handleExamServiceException(ExamServiceException e) {
@@ -45,33 +34,14 @@ public class ExamServiceHandlerException {
         ).build(HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public HttpEntity<ResponseModel> handleHttpMessageNotReadableException() {
+    @ExceptionHandler({MethodArgumentTypeMismatchException.class, HttpMessageNotReadableException.class, HttpMediaTypeNotSupportedException.class, MissingRequestHeaderException.class})
+    public HttpEntity<ResponseModel> handleReturnBadRequest() {
         StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
 
         return new ResponseModel(
                 new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
         ).build(HttpStatus.BAD_REQUEST);
     }
-
-    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public HttpEntity<ResponseModel> handleHttpMediaTypeNotSupportedException() {
-        StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
-
-        return new ResponseModel(
-                new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-        ).build(HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(MissingRequestHeaderException.class)
-    public HttpEntity<ResponseModel> handleMissingRequestHeaderException() {
-        StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
-
-        return new ResponseModel(
-                new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-        ).build(HttpStatus.BAD_REQUEST);
-    }
-
 
 
 }

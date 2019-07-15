@@ -3,7 +3,7 @@ package com.digitalacademy.examservice.controller;
 import com.digitalacademy.examservice.constants.StatusResponse;
 import com.digitalacademy.examservice.controllers.ExamController;
 import com.digitalacademy.examservice.exceptions.ExamServiceException;
-import com.digitalacademy.examservice.exceptions.handlers.ExamServiceHandlerException;
+import com.digitalacademy.examservice.exceptions.handlers.ExamServiceExceptionHandler;
 import com.digitalacademy.examservice.mock.ExamMockTest;
 import com.digitalacademy.examservice.models.HistoryExam;
 import com.digitalacademy.examservice.services.ExamService;
@@ -17,11 +17,14 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -33,6 +36,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class ExamControllerTest {
     private static final Logger log = LogManager.getLogger(ExamService.class.getName());
 
@@ -49,7 +55,7 @@ public class ExamControllerTest {
         MockitoAnnotations.initMocks(this);
         examController = new ExamController(examService);
         mvc = MockMvcBuilders.standaloneSetup(examController)
-                .setControllerAdvice(new ExamServiceHandlerException())
+                .setControllerAdvice(new ExamServiceExceptionHandler())
                 .build();
     }
 
@@ -500,7 +506,6 @@ public class ExamControllerTest {
     @Test
     void testGetAllExamFailWithSpace() throws Exception {
         when(examService.getExam()).thenThrow(new ExamServiceException(StatusResponse.GET_BAD_REQUEST, HttpStatus.BAD_REQUEST));
-
 
         MvcResult mvcResult = mvc.perform(get("/exam/list_exam"))
                 .andExpect(status().isBadRequest())

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class ExamServiceInterceptor implements HandlerInterceptor {
-    private static final Logger log = LogManager.getLogger(ExamServiceInterceptor.class.getName());
+    public static final Logger log = LogManager.getLogger(ExamServiceInterceptor.class.getName());
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

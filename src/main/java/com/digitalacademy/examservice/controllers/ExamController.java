@@ -7,7 +7,6 @@ import com.digitalacademy.examservice.models.response.*;
 import com.digitalacademy.examservice.models.ResponseModel;
 import com.digitalacademy.examservice.models.StatusModel;
 import com.digitalacademy.examservice.services.ExamService;
-import com.sun.javafx.binding.StringFormatter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/exam")
 public class ExamController {
-    private static final Logger log = LogManager.getLogger(ExamController.class.getName());
+    public static final Logger log = LogManager.getLogger(ExamController.class.getName());
 
     private ExamService examService;
 
@@ -34,7 +33,7 @@ public class ExamController {
 
     @GetMapping("/{id}")
 
-    public HttpEntity<ResponseModel> getExamById(@PathVariable String id){
+    public HttpEntity<ResponseModel> getExamById(@PathVariable String id) {
         if (id.trim().length() != id.length()) {
             StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
             return new ResponseModel(
@@ -96,11 +95,11 @@ public class ExamController {
     @GetMapping("/exam_most")
     public HttpEntity<ResponseModel> getAllHistoryExam() {
         try {
-            GetHistoryExamMostResponse historyExam = examService.getHistoryExamMost();
+            GetHistoryExamMostResponse getHistoryExamMostResponse = examService.getHistoryExamMost();
             StatusModel status = new StatusModel(
                     StatusResponse.GET_RESPONSE_SUCCESS.getCode(), StatusResponse.GET_RESPONSE_SUCCESS.getMessage()
             );
-            return ResponseEntity.ok(new ResponseModel(status, historyExam));
+            return ResponseEntity.ok(new ResponseModel(status, getHistoryExamMostResponse));
         } catch (Exception e) {
             StatusResponse statusResponse = StatusResponse.GET_DEATH_SERVER;
 
@@ -112,12 +111,6 @@ public class ExamController {
 
     @GetMapping("/last_exam")
     public HttpEntity<ResponseModel> getUserLastDoExam(@RequestHeader("id") Long userId) {
-        /*if (id.trim().length() != id.length()) {
-            StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
-            return new ResponseModel(
-                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-            ).build(HttpStatus.NOT_FOUND);
-        }*/
         try {
 
             GetUserLastDoExam getUserLastDoExam = examService.getUserLastDoExam(userId);
@@ -125,12 +118,6 @@ public class ExamController {
                     StatusResponse.GET_RESPONSE_SUCCESS.getCode(), StatusResponse.GET_RESPONSE_SUCCESS.getMessage()
             );
             return ResponseEntity.ok(new ResponseModel(status, getUserLastDoExam));
-//        } catch (NumberFormatException e) {
-//            StatusResponse statusResponse = StatusResponse.GET_BAD_REQUEST;
-//
-//            return new ResponseModel(
-//                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-//            ).build(HttpStatus.BAD_REQUEST);
         } catch (ExamServiceException e) {
             StatusResponse statusResponse = e.getStatusResponse();
 
@@ -149,20 +136,13 @@ public class ExamController {
     @GetMapping("/history")
 
     public HttpEntity<ResponseModel> getHistoryUserDoExam(@RequestHeader("id") Long userId) {
-
-//        if (id.trim().length() != id.length()) {
-//            StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
-//            return new ResponseModel(
-//                    new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-//            ).build(HttpStatus.NOT_FOUND);
-//        }
         try {
 
-            GetHistoryUser historyExam = examService.getHistoryUser(userId);
+            GetHistoryUser gethistoryUser = examService.getHistoryUser(userId);
             StatusModel status = new StatusModel(
                     StatusResponse.GET_RESPONSE_SUCCESS.getCode(), StatusResponse.GET_RESPONSE_SUCCESS.getMessage()
             );
-            return ResponseEntity.ok(new ResponseModel(status, historyExam));
+            return ResponseEntity.ok(new ResponseModel(status, gethistoryUser));
         } catch (ExamServiceException e) {
             StatusResponse statusResponse = e.getStatusResponse();
 
@@ -181,16 +161,15 @@ public class ExamController {
     @PostMapping("/create_history")
     public HttpEntity<ResponseModel> createHistoryExam(@Valid @RequestHeader("id") Long userId, @RequestBody HistoryExam body, Errors error) throws ExamServiceException {
 
-        if(error.hasErrors() || body.getHistoryExamId() == null || body.getHistoryScore() == null){
+        if (error.hasErrors() || body.getHistoryExamId() == null || body.getHistoryScore() == null) {
             throw new ExamServiceException(
                     StatusResponse.GET_BAD_REQUEST,
                     HttpStatus.BAD_REQUEST
             );
         }
         try {
-
             body.setHistoryUserId(userId);
-            HistoryExam historyExam = examService.createHistoryExam(body);
+            examService.createHistoryExam(body);
             StatusModel status = new StatusModel(
                     StatusResponse.GET_CREATED_SUCCESS.getCode(), StatusResponse.GET_CREATED_SUCCESS.getMessage()
             );

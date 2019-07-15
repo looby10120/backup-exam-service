@@ -21,7 +21,7 @@ import java.util.*;
 @Service
 public class ExamService {
 
-    private static final Logger log = LogManager.getLogger(ExamService.class.getName());
+    public static final Logger log = LogManager.getLogger(ExamService.class.getName());
 
     private ExamRepository examRepository;
     private QuestionRepository questionRepository;
@@ -35,7 +35,7 @@ public class ExamService {
         this.historyExamRepository = historyExamRepository;
     }
 
-    public List<GetListExamResponse> getExam() throws Exception {
+    public List<GetListExamResponse> getExam() throws Exception{
         List<Exam> examList = examRepository.findAll();
         List<GetListExamResponse> examResponseList = new ArrayList<>();
         for (int i = 0; i < examList.size(); i++) {
@@ -101,7 +101,7 @@ public class ExamService {
         return getExamResponse;
     }
 
-    public GetHistoryExamMostResponse getHistoryExamMost() throws Exception {
+    public GetHistoryExamMostResponse getHistoryExamMost() {
         List<Exam> examList = examRepository.findAll();
         ArrayList<GetHistoryTopFire> historyArrayList = new ArrayList<>();
         int countLoop;
@@ -120,26 +120,8 @@ public class ExamService {
             historyArrayList.add(getHistoryTopFire);
         }
         Collections.reverse(historyArrayList);
-        GetHistoryExamMostResponse getHistoryExamMostResponse = new GetHistoryExamMostResponse(historyArrayList);
 
-        return getHistoryExamMostResponse;
-    }
-
-
-    public List<Question> getQuestion() {
-        return questionRepository.findAll();
-    }
-
-    public List<Question> getQuestionById(Long question_exam_id) {
-        return questionRepository.findAllByQuestionExamId(question_exam_id);
-    }
-
-    public List<Choice> getChoice() {
-        return choiceRepository.findAll();
-    }
-
-    public List<Choice> getChoiceById(Long choice_que_id) {
-        return choiceRepository.findAllByChoiceQuestionId(choice_que_id);
+        return new GetHistoryExamMostResponse(historyArrayList);
     }
 
     public GetUserLastDoExam getUserLastDoExam(Long id) throws Exception {
