@@ -2,9 +2,7 @@ package com.digitalacademy.examservice.services;
 
 import com.digitalacademy.examservice.exceptions.ExamServiceException;
 import com.digitalacademy.examservice.mock.ExamMockTest;
-import com.digitalacademy.examservice.models.Choice;
 import com.digitalacademy.examservice.models.HistoryExam;
-import com.digitalacademy.examservice.models.Question;
 import com.digitalacademy.examservice.models.response.*;
 
 import com.digitalacademy.examservice.repositories.ChoiceRepository;
@@ -23,8 +21,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -283,6 +279,12 @@ public class ExamServiceTest {
         when(examRepository.findAllByExamId(1L)).thenReturn(examMockTest.getListExamAllService5Element().get(0));
         when(examRepository.findAllByExamId(2L)).thenReturn(examMockTest.getListExamAllService5Element().get(1));
 
+        when(questionRepository.countByQuestionExamId(1L)).thenReturn(1L);
+        when(questionRepository.countByQuestionExamId(2L)).thenReturn(2L);
+        when(questionRepository.countByQuestionExamId(3L)).thenReturn(3L);
+        when(questionRepository.countByQuestionExamId(4L)).thenReturn(4L);
+        when(questionRepository.countByQuestionExamId(5L)).thenReturn(5L);
+
         GetUserLastDoExam resp = this.examService.getUserLastDoExam(requestParam);
 
         assertEquals("2", resp.getCountDoExam().toString());
@@ -305,6 +307,13 @@ public class ExamServiceTest {
         when(examRepository.findAllByExamId(3L)).thenReturn(examMockTest.getListExamAllService5Element().get(2));
         when(examRepository.findAllByExamId(4L)).thenReturn(examMockTest.getListExamAllService5Element().get(3));
         when(examRepository.findAllByExamId(5L)).thenReturn(examMockTest.getListExamAllService5Element().get(4));
+
+        when(questionRepository.countByQuestionExamId(1L)).thenReturn(1L);
+        when(questionRepository.countByQuestionExamId(2L)).thenReturn(2L);
+        when(questionRepository.countByQuestionExamId(3L)).thenReturn(3L);
+        when(questionRepository.countByQuestionExamId(4L)).thenReturn(4L);
+        when(questionRepository.countByQuestionExamId(5L)).thenReturn(5L);
+
 
         GetUserLastDoExam resp = this.examService.getUserLastDoExam(requestParam);
 

@@ -13,5 +13,6 @@ public class GetUserLastDoExamContent{
     private Long examId;
     private String examName;
     private Long timestamp;
-
+    private int examTotalScore;
+    private Long countQuestion;
 }

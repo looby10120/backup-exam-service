@@ -153,7 +153,8 @@ public class ExamService {
             GetUserLastDoExamContent getUserLastDoExamContent = new GetUserLastDoExamContent();
             getUserLastDoExamContent.setExamId(historyExamArrayList.get(j).getHistoryExamId());
             getUserLastDoExamContent.setExamName(examRepository.findAllByExamId(historyExamArrayList.get(j).getHistoryExamId()).getExamName());
-
+            getUserLastDoExamContent.setExamTotalScore(examRepository.findAllByExamId(historyExamArrayList.get(j).getHistoryExamId()).getExamTotalScore());
+            getUserLastDoExamContent.setCountQuestion(questionRepository.countByQuestionExamId((historyExamArrayList.get(j).getHistoryExamId())));
             getUserLastDoExamContent.setTimestamp(historyExamArrayList.get(j).getHistoryLastUpdate().getTime());
             getUserLastDoExamContentArrayList.add(getUserLastDoExamContent);
         }
