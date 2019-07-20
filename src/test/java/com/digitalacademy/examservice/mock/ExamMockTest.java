@@ -462,6 +462,16 @@ public class ExamMockTest {
         return historyExam;
     }
 
+    public static HistoryExam sethistoryCreateMockControl() {
+
+        HistoryExam historyExam = new HistoryExam();
+        historyExam.setHistoryId(1L);
+        historyExam.setHistoryExamId(1L);
+        historyExam.setHistoryScore(10);
+
+        return historyExam;
+    }
+
     public static HistoryExam gethistoryCreateMockControl() {
 
         HistoryExam historyExam = new HistoryExam();

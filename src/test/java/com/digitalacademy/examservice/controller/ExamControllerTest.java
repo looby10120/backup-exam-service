@@ -314,7 +314,7 @@ public class ExamControllerTest {
     @DisplayName("test createHistory return data success")
     void createHistory() throws Exception {
 
-        HistoryExam historyExamRequest = ExamMockTest.sethistoryCreateMock();
+        HistoryExam historyExamRequest = ExamMockTest.sethistoryCreateMockControl();
         log.info(historyExamRequest);
         Long userId = 1L;
         ObjectMapper mapper = new ObjectMapper();
@@ -322,7 +322,7 @@ public class ExamControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(historyExamRequest);
 
-        when(examService.createHistoryExam(historyExamRequest)).thenReturn(ExamMockTest.gethistoryCreateMock());
+        when(examService.createHistoryExam(historyExamRequest)).thenReturn(ExamMockTest.gethistoryCreateMockControl());
         log.info("2: "+historyExamRequest);
         MvcResult mvcResult = mvc.perform(post("/exam/create_history")
                 .header("id", userId)
@@ -410,7 +410,7 @@ public class ExamControllerTest {
     @Test
     void testCreateHistoryInternalServerError() throws Exception {
 
-        HistoryExam historyExamRequest = ExamMockTest.sethistoryCreateMock();
+        HistoryExam historyExamRequest = ExamMockTest.sethistoryCreateMockControl();
         Long userId = 1L;
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);

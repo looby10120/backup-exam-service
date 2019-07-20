@@ -189,7 +189,7 @@ public class ExamController {
 
     @PostMapping("/create_history")
     public HttpEntity<ResponseModel> createHistoryExam(@Valid @RequestHeader("id") Long userId, @RequestBody HistoryExam body, Errors error) throws ExamServiceException{
-        if (error.hasErrors() || body.getHistoryLastUpdate() != null || body.getHistoryTime() != null || body.getHistoryId() != null || body.getHistoryUserId() != null || body.getHistoryExamId() == null || body.getHistoryScore() == null ) {
+        if (error.hasErrors() || body.getHistoryLastUpdate() != null || body.getHistoryTime() != null || body.getHistoryUserId() != null || body.getHistoryExamId() == null || body.getHistoryScore() == null ) {
             throw new ExamServiceException(
                     StatusResponse.GET_BAD_REQUEST,
                     HttpStatus.BAD_REQUEST
@@ -204,7 +204,6 @@ public class ExamController {
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseModel(status));
         } catch (Exception e) {
             StatusResponse statusResponse = StatusResponse.GET_DEATH_SERVER;
-
             return new ResponseModel(
                     new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
             ).build(HttpStatus.INTERNAL_SERVER_ERROR);
