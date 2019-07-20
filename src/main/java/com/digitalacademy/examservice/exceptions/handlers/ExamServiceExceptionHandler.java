@@ -1,9 +1,12 @@
 package com.digitalacademy.examservice.exceptions.handlers;
 
 import com.digitalacademy.examservice.constants.StatusResponse;
+import com.digitalacademy.examservice.controllers.ExamController;
 import com.digitalacademy.examservice.exceptions.ExamServiceException;
 import com.digitalacademy.examservice.models.ResponseModel;
 import com.digitalacademy.examservice.models.StatusModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -16,7 +19,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 @RestControllerAdvice
 public class ExamServiceExceptionHandler {
-
     @ExceptionHandler(value = {ExamServiceException.class})
     public HttpEntity<ResponseModel> handleExamServiceException(ExamServiceException e) {
         return new ResponseModel(new StatusModel(
@@ -42,6 +44,4 @@ public class ExamServiceExceptionHandler {
                 new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
         ).build(HttpStatus.BAD_REQUEST);
     }
-
-
 }

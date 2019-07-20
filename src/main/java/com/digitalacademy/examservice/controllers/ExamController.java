@@ -32,8 +32,13 @@ public class ExamController {
     }
 
     @GetMapping("/{id}")
-
-    public HttpEntity<ResponseModel> getExamById(@PathVariable String id) {
+    public HttpEntity<ResponseModel> getExamById(@PathVariable String id, HttpEntity<String> httpEntity) throws ExamServiceException {
+        if(httpEntity.getBody() != null){
+            throw new ExamServiceException(
+                    StatusResponse.GET_BAD_REQUEST,
+                    HttpStatus.BAD_REQUEST
+            );
+        }
         if (id.trim().length() != id.length()) {
             StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
             return new ResponseModel(
@@ -70,7 +75,13 @@ public class ExamController {
     }
 
     @GetMapping("/list_exam")
-    public HttpEntity<ResponseModel> getAllExam() {
+    public HttpEntity<ResponseModel> getAllExam(HttpEntity<String> httpEntity) throws ExamServiceException {
+        if(httpEntity.getBody() != null){
+            throw new ExamServiceException(
+                    StatusResponse.GET_BAD_REQUEST,
+                    HttpStatus.BAD_REQUEST
+            );
+        }
         try {
             List<GetListExamResponse> listExam = examService.getExam();
             StatusModel status = new StatusModel(
@@ -93,7 +104,13 @@ public class ExamController {
     }
 
     @GetMapping("/exam_most")
-    public HttpEntity<ResponseModel> getAllHistoryExam() {
+    public HttpEntity<ResponseModel> getAllHistoryExam(HttpEntity<String> httpEntity) throws ExamServiceException {
+        if(httpEntity.getBody() != null){
+            throw new ExamServiceException(
+                    StatusResponse.GET_BAD_REQUEST,
+                    HttpStatus.BAD_REQUEST
+            );
+        }
         try {
             GetHistoryExamMostResponse getHistoryExamMostResponse = examService.getHistoryExamMost();
             StatusModel status = new StatusModel(
@@ -110,7 +127,13 @@ public class ExamController {
     }
 
     @GetMapping("/last_exam")
-    public HttpEntity<ResponseModel> getUserLastDoExam(@RequestHeader("id") Long userId) {
+    public HttpEntity<ResponseModel> getUserLastDoExam(@RequestHeader("id") Long userId, HttpEntity<String> httpEntity) throws ExamServiceException{
+        if(httpEntity.getBody() != null){
+            throw new ExamServiceException(
+                    StatusResponse.GET_BAD_REQUEST,
+                    HttpStatus.BAD_REQUEST
+            );
+        }
         try {
 
             GetUserLastDoExam getUserLastDoExam = examService.getUserLastDoExam(userId);
@@ -135,7 +158,13 @@ public class ExamController {
 
     @GetMapping("/history")
 
-    public HttpEntity<ResponseModel> getHistoryUserDoExam(@RequestHeader("id") Long userId) {
+    public HttpEntity<ResponseModel> getHistoryUserDoExam(@RequestHeader("id") Long userId, HttpEntity<String> httpEntity) throws ExamServiceException{
+        if(httpEntity.getBody() != null){
+            throw new ExamServiceException(
+                    StatusResponse.GET_BAD_REQUEST,
+                    HttpStatus.BAD_REQUEST
+            );
+        }
         try {
 
             GetHistoryUser gethistoryUser = examService.getHistoryUser(userId);
@@ -159,9 +188,8 @@ public class ExamController {
     }
 
     @PostMapping("/create_history")
-    public HttpEntity<ResponseModel> createHistoryExam(@Valid @RequestHeader("id") Long userId, @RequestBody HistoryExam body, Errors error) throws ExamServiceException {
-
-        if (error.hasErrors() || body.getHistoryExamId() == null || body.getHistoryScore() == null) {
+    public HttpEntity<ResponseModel> createHistoryExam(@Valid @RequestHeader("id") Long userId, @RequestBody HistoryExam body, Errors error) throws ExamServiceException{
+        if (error.hasErrors() || body.getHistoryLastUpdate() != null || body.getHistoryTime() != null || body.getHistoryId() != null || body.getHistoryUserId() != null || body.getHistoryExamId() == null || body.getHistoryScore() == null ) {
             throw new ExamServiceException(
                     StatusResponse.GET_BAD_REQUEST,
                     HttpStatus.BAD_REQUEST
