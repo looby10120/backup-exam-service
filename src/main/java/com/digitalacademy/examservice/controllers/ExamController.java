@@ -161,7 +161,7 @@ public class ExamController {
     @PostMapping("/create_history")
     public HttpEntity<ResponseModel> createHistoryExam(@Valid @RequestHeader("id") Long userId, @RequestBody HistoryExam body, Errors error) throws ExamServiceException {
 
-        if (error.hasErrors() || body.getHistoryExamId() == null || body.getHistoryScore() == null) {
+        if (body.getHistoryExamId() == null || body.getHistoryScore() == null) {
             throw new ExamServiceException(
                     StatusResponse.GET_BAD_REQUEST,
                     HttpStatus.BAD_REQUEST
