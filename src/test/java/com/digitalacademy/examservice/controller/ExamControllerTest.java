@@ -237,7 +237,7 @@ public class ExamControllerTest {
     @Test
     void testGetTop5HistoryExamInternalServerError() throws Exception {
 
-        when(examService.getHistoryExamMost()).thenThrow(Exception.class);
+        doThrow(Exception.class).when(examService).getHistoryExamMost();
 
         MvcResult mvcResult = mvc.perform(get("/exam/exam_most"))
                 .andExpect(status().isInternalServerError())
@@ -405,6 +405,8 @@ public class ExamControllerTest {
         verify(examService, times(1)).getUserLastDoExam(requestId);
     }
 
+
+
     @DisplayName("Test createHistoryInternalServerError")
     @Test
     void testCreateHistoryInternalServerError() throws Exception {
@@ -416,7 +418,9 @@ public class ExamControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson = ow.writeValueAsString(historyExamRequest);
 
-        when(examService.createHistoryExam(historyExamRequest)).thenThrow(Exception.class);
+
+        when(examService.createHistoryExam(any())).thenThrow(Exception.class);
+//        doThrow(Exception.class).when(examService).createHistoryExam(any());
 
         MvcResult mvcResult = mvc.perform(post("/exam/create_history")
                 .header("id", userId)
@@ -430,7 +434,6 @@ public class ExamControllerTest {
         assertEquals("9900", status.get("code").toString());
         assertEquals("death server", status.get("message"));
 
-        verify(examService, times(1)).createHistoryExam(historyExamRequest);
     }
 
     @DisplayName("Test testCreateHistoryHeaderBadRequest")
