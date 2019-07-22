@@ -1,5 +1,6 @@
 package com.digitalacademy.examservice.services;
 
+import com.digitalacademy.examservice.constants.StatusResponse;
 import com.digitalacademy.examservice.exceptions.ExamServiceException;
 import com.digitalacademy.examservice.mock.ExamMockTest;
 import com.digitalacademy.examservice.models.HistoryExam;
@@ -19,6 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -356,7 +358,6 @@ public class ExamServiceTest {
         assertEquals("10", resp.getHistoryScore().toString());
         assertEquals("30", resp.getHistoryTime().toString());
     }
-
 
     @DisplayName("Test last do exam with array empty then throws 1699")
     @Test

@@ -484,6 +484,31 @@ public class ExamControllerTest {
         assertEquals("bad request", status.get("message"));
     }
 
+    @DisplayName("Test testCreateHistoryBodyBadRequest")
+    @Test
+    void testCreateHistoryWithScoreNull() throws Exception {
+
+        HistoryExam historyExamRequest = ExamMockTest.gethistoryCreateBodyScoreNullMock();
+        Long userId = 1L;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+        String requestJson = ow.writeValueAsString(historyExamRequest);
+
+
+        MvcResult mvcResult = mvc.perform(post("/exam/create_history")
+                .header("id", userId)
+                .contentType(MediaType.APPLICATION_JSON).content(requestJson))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        JSONObject resp = new JSONObject(mvcResult.getResponse().getContentAsString());
+        JSONObject status = new JSONObject(resp.getString("status"));
+
+        assertEquals("1499", status.get("code").toString());
+        assertEquals("bad request", status.get("message"));
+    }
+
     @DisplayName("")
     @Test
     void testGetAllExamFailWrongPath() throws Exception {
