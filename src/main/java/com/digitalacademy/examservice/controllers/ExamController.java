@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -188,7 +187,7 @@ public class ExamController {
     }
 
     @PostMapping("/create_history")
-    public HttpEntity<ResponseModel> createHistoryExam(@Valid @RequestHeader("id") Long userId, @RequestBody HistoryExam body) throws ExamServiceException{
+    public HttpEntity<ResponseModel> createHistoryExam(@Valid @RequestHeader("id") Long userId, @RequestBody HistoryExam body) throws Exception {
         if (body.getHistoryLastUpdate() != null || body.getHistoryTime() != null || body.getHistoryId() != null || body.getHistoryUserId() != null || body.getHistoryExamId() == null || body.getHistoryScore() == null ) {
             throw new ExamServiceException(
                     StatusResponse.GET_BAD_REQUEST,
