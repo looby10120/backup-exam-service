@@ -32,8 +32,8 @@ public class ExamServiceExceptionHandler {
         StatusResponse statusResponse = StatusResponse.GET_REQUEST_WRONG_URL_PATH;
 
         return new ResponseModel(
-                new StatusModel(statusResponse.getCode(), statusResponse.getMessage())
-        ).build(HttpStatus.NOT_FOUND);
+                new StatusModel(statusResponse.getCode(), "request error")
+        ).build(HttpStatus.METHOD_NOT_ALLOWED);
     }
 
     @ExceptionHandler({MethodArgumentTypeMismatchException.class, HttpMessageNotReadableException.class, HttpMediaTypeNotSupportedException.class, MissingRequestHeaderException.class})
