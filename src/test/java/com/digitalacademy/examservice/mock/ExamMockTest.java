@@ -488,6 +488,15 @@ public class ExamMockTest {
         historyExam.setHistoryId(1L);
         return historyExam;
     }
+    public static HistoryExam gethistoryCreateBodyScoreNullMock() {
+
+        HistoryExam historyExam = new HistoryExam();
+        historyExam.setHistoryId(1L);
+        historyExam.setHistoryExamId(1L);
+        historyExam.setHistoryUserId(1L);
+        historyExam.setHistoryTime(30);
+        return historyExam;
+    }
 
     public static ArrayList<HistoryExam> historyExamEmpty() {
         ArrayList<HistoryExam> history = new ArrayList<>();
