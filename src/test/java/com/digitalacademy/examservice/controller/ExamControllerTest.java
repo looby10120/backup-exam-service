@@ -405,9 +405,7 @@ public class ExamControllerTest {
         verify(examService, times(1)).getUserLastDoExam(requestId);
     }
 
-
-/*
-    @DisplayName("Test createHistoryInternalServerError")
+/*    @DisplayName("Test createHistoryInternalServerError")
     @Test
     void testCreateHistoryInternalServerError() throws Exception {
 

@@ -188,7 +188,7 @@ public class ExamController {
     }
 
     @PostMapping("/create_history")
-    public HttpEntity<ResponseModel> createHistoryExam(@Valid @RequestHeader("id") Long userId, @RequestBody HistoryExam body, Errors error) throws ExamServiceException{
+    public HttpEntity<ResponseModel> createHistoryExam(@Valid @RequestHeader("id") Long userId, @RequestBody HistoryExam body) throws ExamServiceException{
         if (body.getHistoryLastUpdate() != null || body.getHistoryTime() != null || body.getHistoryId() != null || body.getHistoryUserId() != null || body.getHistoryExamId() == null || body.getHistoryScore() == null ) {
             throw new ExamServiceException(
                     StatusResponse.GET_BAD_REQUEST,
