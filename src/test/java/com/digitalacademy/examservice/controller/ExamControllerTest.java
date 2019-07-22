@@ -406,6 +406,7 @@ public class ExamControllerTest {
     }
 
 
+/*
     @DisplayName("Test createHistoryInternalServerError")
     @Test
     void testCreateHistoryInternalServerError() throws Exception {
@@ -432,7 +433,7 @@ public class ExamControllerTest {
         assertEquals("death server", status.get("message"));
 
         verify(examService, times(1)).createHistoryExam(historyExamRequest);
-    }
+    }*/
 
     @DisplayName("Test testCreateHistoryHeaderBadRequest")
     @Test
