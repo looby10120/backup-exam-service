@@ -5,7 +5,7 @@ target/
 !**/src/main/resources/**
 
 ### IntelliJ IDEA ###
-.idea/**
+*.idea/**
 *.iws
 *.iml
 *.ipr
